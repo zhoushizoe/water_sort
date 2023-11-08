@@ -53,7 +53,7 @@ class NewGuidance(BaseElement):
         :return:
         """
         sleep(5)
-        self.image_click([762, 2388])
+        self.image_click([635, 2152])
         sleep(2)
         return self
 

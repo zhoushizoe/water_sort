@@ -20,7 +20,7 @@ friday = [963, 1589]
 saturday = [1130, 1567]
 sunday = [153, 1747]
 three_Day = [788, 1923]
-language = "意大利语"
+language = "iphone德语"
 monday_push = "周一推送"
 tuesday_push = "周二推送"
 Wednesday_push = "周三推送"
@@ -28,6 +28,8 @@ thursday_push = "周四推送"
 friday_push = "周五推送"
 saturday_push = "周六推送"
 sunday_push = "周日推送"
+back_page = "回归弹窗"
+congratulation_page = "通关弹窗"
 
 
 class PushLanguage:
@@ -43,7 +45,11 @@ class PushLanguage:
 
     def first_open(self):
         # 安装iOS包
-        self.PolicyPage.first_start_ws().goto_guidance()
+        self.PolicyPage.first_start_ws().goto_guidance().first_guidance_step1().first_guidance_step2().guidance_victory()
+        self.NewGuidance.second_guidance_step1().second_guidance_step2().second_guidance_step3(). \
+            second_guidance_step1().guidance_victory()
+        self.BaseElement.sleep_time()
+        self.BaseElement.image_click([292, 202])
         # 游戏后台
         keyevent("home")
         return self
@@ -74,7 +80,9 @@ class PushLanguage:
         return self
 
     def goback_game(self):
-        self.AdjustTime.ios_goback_home()
+        self.AdjustTime.ios_goback_home().goto_game()
+        self.BaseElement.sleep_time(5)
+
         return self
 
     def adjust_three_day(self, three_days):
@@ -92,9 +100,43 @@ class PushLanguage:
     def get_back_snapshot(self, filename, language):
         self.BaseElement.sleep_time()
         self.AdjustTime.goto_game()
-        self.BaseElement.sleep_time(5)
+        self.BaseElement.sleep_time(10)
+        self.BaseElement.image_click([279, 198])
+        self.BaseElement.sleep_time()
         self.BaseElement.get_snapshot(filename, language)
+        self.BaseElement.sleep_time()
+        self.BaseElement.image_click([711, 1887])
+        self.BaseElement.sleep_time(3)
         return self
+
+    def congratulation_page(self, congratulation_page, language):
+        # self.BaseElement.image_click([590, 1071], times=10)
+        self.BaseElement.sleep_time(5)
+        self.BaseElement.image_click([400, 166])
+        self.BaseElement.sleep_time(1)
+        self.BaseElement.image_click([531, 842])
+        self.BaseElement.sleep_time(1)
+        self.BaseElement.image_click([1013, 1828])
+        self.BaseElement.sleep_time(1)
+        self.BaseElement.image_click([540, 851])
+        self.BaseElement.sleep_time()
+        self.BaseElement.image_click([1184, 2319])
+        self.BaseElement.sleep_time()
+        self.BaseElement.image_click([81, 2472])
+        self.BaseElement.sleep_time()
+        self.BaseElement.image_click([207, 1995])
+        self.BaseElement.image_click([1216, 1954], times=3)
+        self.BaseElement.sleep_time(1)
+        self.BaseElement.image_click([1013, 1819])
+        self.BaseElement.image_click([621, 729])
+        self.BaseElement.sleep_time()
+        self.BaseElement.image_click([581, 1900])
+        self.BaseElement.sleep_time()
+        self.BaseElement.image_click([873, 157])
+        self.BaseElement.sleep_time(40)
+        self.BaseElement.image_click([1013, 157], times=8)
+        self.BaseElement.sleep_time(5)
+        self.BaseElement.get_snapshot(congratulation_page, language)
 
 
 if __name__ == "__main__":
@@ -103,4 +145,5 @@ if __name__ == "__main__":
             "ios:///http://127.0.0.1:8300", ])
     # PushLanguage().adjust_time_start()
     # PushLanguage().first_open().get_push(monday).snapshot_push(monday_push, language).goback_game()
-    PushLanguage().adjust_three_day(three_Day).goback_game()
+    PushLanguage().first_open().adjust_three_day(three_Day).get_back_snapshot(back_page, language)
+    PushLanguage().congratulation_page(congratulation_page, language)

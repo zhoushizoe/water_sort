@@ -26,7 +26,7 @@ class PolicyPage(BaseElement, WaterSortApp):
                              resolution=(1096, 2560))
 
     water_sort_ios_package = 'ios.water.sort.puzzle.inner'
-    water_sort_ios_install = r"/Users/amber/Downloads/WaterSort.ipa"
+    water_sort_ios_install = r"/Users/amber/Downloads/1108_1153/WaterSort.ipa"
     water_sort_android = "water.sort.puzzle.android.inner"
 
     def first_start_ws(self):

@@ -131,7 +131,7 @@ class AdjustTime(BaseElement):
         # 查看通知
         self.image_swipe([252, 4], [252, 1891])
         self.sleep_time()
-        self.image_swipe([247, 2044], [256, 1405])
+        self.image_swipe([662, 2733], [680, 270])
         return self
 
     def ios_goback_home(self):
@@ -150,6 +150,7 @@ class AdjustTime(BaseElement):
             self.image_swipe([1067, 2152], [81, 2058])
         if exists(self.water_sort_icon):
             self.image_click(self.water_sort_icon)
+            keyevent("HOME")
             return self
 
 
