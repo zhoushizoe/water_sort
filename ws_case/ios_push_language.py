@@ -143,7 +143,7 @@ if __name__ == "__main__":
     if not cli_setup():
         auto_setup(__file__, logdir=True, devices=[
             "ios:///http://127.0.0.1:8300", ])
-    # PushLanguage().adjust_time_start()
-    # PushLanguage().first_open().get_push(monday).snapshot_push(monday_push, language).goback_game()
+    PushLanguage().adjust_time_start()
+    PushLanguage().first_open().get_push(monday).snapshot_push(monday_push, language).goback_game()
     PushLanguage().first_open().adjust_three_day(three_Day).get_back_snapshot(back_page, language)
     PushLanguage().congratulation_page(congratulation_page, language)
