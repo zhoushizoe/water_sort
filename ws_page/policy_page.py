@@ -6,7 +6,6 @@ from ws_base.base_ws import BaseElement
 from airtest.core.api import *
 from airtest.cli.parser import cli_setup
 from ws_base.app_base_ws import WaterSortApp
-# from page.new_guidance import NewGuidance
 from ws_page.guidance_page import NewGuidance
 
 
@@ -24,6 +23,8 @@ class PolicyPage(BaseElement, WaterSortApp):
                               record_pos=(-0.237, -0.131), resolution=(1096, 2560))
     privacy_close = Template(r"../picture/policy_page_picture/privacy_close.png", record_pos=(0.0, 1.058),
                              resolution=(1096, 2560))
+    information_image = Template(r"../picture/policy_page_picture/information_image.png", record_pos=(-0.001, 0.45),
+                                 resolution=(1440, 3088))
 
     water_sort_ios_package = 'ios.water.sort.puzzle.inner'
     water_sort_ios_install = r"/Users/amber/Downloads/1108_1153/WaterSort.ipa"
@@ -31,7 +32,7 @@ class PolicyPage(BaseElement, WaterSortApp):
 
     def first_start_ws(self):
         """
-        首次打开游戏，弹出隐私弹窗
+        iOS的首次打开游戏，弹出隐私弹窗
         :return:
         """
         # 卸载iOS包
@@ -44,17 +45,25 @@ class PolicyPage(BaseElement, WaterSortApp):
         return self
 
     def first_start_android(self):
+        """
+        首次打开安卓
+        :return:
+        """
         self.clear_app(self.water_sort_android)
         self.sleep_time(1)
         self.first_start_app(self.water_sort_android)
         self.sleep_time()
-        self.image_click([711, 2484])
-        self.sleep_time()
         return self
 
-    def start_android(self):
-        self.first_start_app(self.water_sort_android)
-        self.sleep_time()
+    def close_information_page(self):
+        """
+        首次进入游戏，会出现是否接受通知的弹窗，选择通知
+        :return:
+        """
+        if exists(self.information_image):
+            self.image_click([712, 2482])
+        else:
+            return
         return self
 
     def goto_guidance(self):
@@ -62,21 +71,17 @@ class PolicyPage(BaseElement, WaterSortApp):
         点击隐私弹窗的i know按钮，进入新手引导
         :return: return 到新手引导页面：NewGuidance()
         """
-        if exists(self.policy_iknow_button):
-            self.image_click(self.policy_iknow_button)
-        else:
-            self.image_click([711, 1928])
-        sleep(3)
+        self.image_click_plus(self.policy_iknow_button, [711, 1928])
+        self.sleep_time()
         return NewGuidance()
 
     # 关闭开启游戏时的日志弹窗
     def close_log(self):
-        self.image_click(self.close_log_listen)
-        return self
-
-    # 使用坐标的形式关闭游戏的日志弹窗
-    def close_log_position(self):
-        self.image_click([127, 1127])
+        """
+        安卓每次启动游戏都会有一个日志弹窗，没用，可以关闭
+        :return:
+        """
+        self.image_click_plus(self.close_log_listen, [137, 1405])
         return self
 
     # 点击进入tos隐私弹窗页面
@@ -92,12 +97,24 @@ class PolicyPage(BaseElement, WaterSortApp):
 
     # 进入隐私弹窗后，点击close按钮回到引导弹窗
     def privicy_close(self):
-        self.image_click(self.privacy_close)
+        """
+        进入隐私弹窗网页之后回到隐私弹窗页面
+        :return:
+        """
+        self.image_click_plus(self.privacy_close, [747, 2915])
         return self
+
+    def android_automate_process(self):
+        """
+        从首次打开游戏到进入新手引导全流程
+        :return:
+        """
+        self.first_start_android().close_information_page().close_log().privicy_close().goto_guidance()
+        return NewGuidance()
 
 
 if __name__ == "__main__":
     if not cli_setup():
         auto_setup(__file__, logdir=True, devices=[
             "android://127.0.0.1:5037/R3CW10C3D9N?cap_method=MINICAP&touch_method=MAXTOUCH&", ])
-    PolicyPage().first_start_android()
+    PolicyPage().first_start_android().close_information_page().close_log().privicy_close().goto_guidance()

@@ -4,6 +4,7 @@
 # Time: 2023/10/16 2:42 下午
 from airtest.core.api import *
 from airtest.cli.parser import cli_setup
+from poco.drivers.ios import iosPoco
 
 
 class WaterSortApp:
@@ -11,27 +12,25 @@ class WaterSortApp:
     一些关于倒水的前置操作
     """
 
-    # 安装游戏
-    def install_app(self):
-        pass
-
-    def poco_set(self):
-        # UnityPoco()
+    def install_app(self, package_path):
+        """
+        安装应用（安卓iOS通用）
+        :param package_path:
+        :return:
+        """
+        install(package_path)
         return self
 
     # 首次开启游戏
     def first_start_app(self, package):
         start_app(package)
         sleep(5)
-        # self.poco_set()
-
-        # return PolicyPage()
+        return self
 
     # 非首次开启游戏
     def start_app(self, package):
         start_app(package)
         sleep(5)
-        self.poco_set()
         # return MainPage()
 
     # 关闭游戏
@@ -39,8 +38,6 @@ class WaterSortApp:
         stop_app(package)
         sleep(2)
         return self
-
-        pass
 
     # 清除游戏数据
     def clear_app(self, package):
@@ -59,4 +56,15 @@ class WaterSortApp:
 
     def goback_home(self):
         keyevent("HOME")
+        return self
+
+    def ios_open_app(self, app_name):
+        """
+        airtest中的[start_app]不支持iOS17
+        游戏的名称永远是英文的，所以使用poco的方式打开应用
+        :param app_name:app在首页显示的应用名字
+        :return:
+        """
+
+        poco(app_name).click()
         return self
