@@ -194,14 +194,14 @@ class IosBaseElement:
         text("\b", enter=False)
         return self
 
-    def ios_inter_word(self, enter=False):
+    def ios_inter_word(self, word,enter=False):
         """
           iOS的text()接口默认会在给定的输入字符后面加一个换行符 \n 。
           如果不想要输入之后出现换行的效果，可以把enter = False传到text()接口里面
         :return: 
         """""
 
-        text("\b", enter)
+        text(word, enter)
         return self
 
     def goback_home(self):
@@ -219,7 +219,7 @@ class IosBaseElement:
         :param app_name:app在首页显示的应用名字
         :return:
         """
-
+        poco = iosPoco()
         poco(app_name).click()
         return self
 

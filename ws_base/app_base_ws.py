@@ -58,13 +58,13 @@ class WaterSortApp:
         keyevent("HOME")
         return self
 
-    def ios_open_app(self, app_name):
-        """
-        airtest中的[start_app]不支持iOS17
-        游戏的名称永远是英文的，所以使用poco的方式打开应用
-        :param app_name:app在首页显示的应用名字
-        :return:
-        """
-
-        poco(app_name).click()
-        return self
+    # def ios_open_app(self, app_name):
+    #     """
+    #     airtest中的[start_app]不支持iOS17
+    #     游戏的名称永远是英文的，所以使用poco的方式打开应用
+    #     :param app_name:app在首页显示的应用名字
+    #     :return:
+    #     """
+    #     poco = iosPoco()
+    #     poco(app_name).click()
+    #     return self

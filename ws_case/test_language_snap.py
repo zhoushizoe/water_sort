@@ -10,6 +10,8 @@ from ws_page.nine_tube_game_page import NineTubeGamePage
 from ws_page.victory_step import VictoryStep
 from ws_base.base_ws import BaseElement
 from ws_page.game_page import GamePage
+from ws_page.adjust_time import AdjustTime
+from ws_base.base_ws import IosBaseElement
 
 ST.SAVE_IMAGE = False
 # 暂时关闭截图
@@ -17,10 +19,10 @@ ST.SAVE_IMAGE = False
 ST.SNAPSHOT_QUALITY = 90
 
 
-class TestWatertLanguage(BaseElement):
+class TestWatertLanguage(BaseElement, IosBaseElement):
     auto_setup(__file__, logdir=True,
-               devices=["android://127.0.0.1:5037/R3CW10C3D9N?cap_method=MINICAP&touch_method=MAXTOUCH&", ])
-    language = "test_1"
+               devices=["ios:///http://127.0.0.1:8300", ])
+    language = "test_ios"
     name = rf"{language}/{language}"
 
     def file_path(self, folder_name):
@@ -31,16 +33,30 @@ class TestWatertLanguage(BaseElement):
             os.makedirs(path)
         return self
 
-    def test1_policy_android(self):
+    # def test1_policy_android(self):
+    #     """
+    #     安卓的隐私弹窗页面截图
+    #     :return:
+    #     """
+    #     page = "隐私弹窗"
+    #     self.PolicyPage = PolicyPage()
+    #     self.file_path(self.name)
+    #     self.PolicyPage.first_start_android().close_information_page().close_log().privicy_close()
+    #     self.get_snapshot(page, self.name)
+    #     return self
+
+    def test1_policy_ios(self):
         """
-        安卓的隐私弹窗页面截图
+        开启ios，然后进行隐私弹窗截图(ios开始)
         :return:
         """
-        page = "隐私弹窗"
         self.PolicyPage = PolicyPage()
+
         self.file_path(self.name)
-        self.PolicyPage.first_start_android().close_information_page().close_log().privicy_close()
-        self.get_snapshot(page, self.name)
+        self.PolicyPage.first_start_ios()
+        filename = "隐私弹窗"
+        self.sleep_time()
+        self.get_snapshot(filename, self.name)
         return self
 
     def test2_guidance_step1(self):
@@ -101,24 +117,24 @@ class TestWatertLanguage(BaseElement):
         self.GamePage.goto_language_page()
         self.get_snapshot(page, self.name)
 
-    def test7_contact_us(self):
-        """
-        从语言页面回到设置页面，然后点击进入邮件页面
-        :return:
-        """
-        page = "邮件页面"
-        self.GamePage = GamePage()
-        self.GamePage.language_setting_close().goto_contact_us()
-        self.get_snapshot(page, self.name)
+    # def test7_contact_us(self):
+    #     """
+    #     从语言页面回到设置页面，然后点击进入邮件页面
+    #     :return:
+    #     """
+    #     page = "邮件页面"
+    #     self.GamePage = GamePage()
+    #     self.GamePage.language_setting_close().goto_contact_us()
+    #     self.get_snapshot(page, self.name)
 
     def test8_collect(self):
         """
-        从邮件页面回到设置页面，然后进入收藏页面
+        从语言页面回到设置页面，然后进入收藏页面
         :return:
         """
         page = "收藏页面"
         self.GamePage = GamePage()
-        self.GamePage.contact_goto_setting().goto_collection_page()
+        self.GamePage.language_setting_close().goto_collection_page()
         self.get_snapshot(page, self.name)
 
     def test9_no_inter_toast(self):
@@ -129,7 +145,7 @@ class TestWatertLanguage(BaseElement):
         page = "无网toast"
         self.GamePage = GamePage()
         self.GamePage.collect_back_setting().setting_close().click_withdraw_tool()
-        self.sleep_time(6)
+        self.sleep_time(1)
         self.get_snapshot(page, self.name)
 
     def test9_no_step_toast(self):
@@ -341,3 +357,29 @@ class TestWatertLanguage(BaseElement):
         level = "600"
         self.unlock(page, level)
         return self
+
+    def test39_congratulation_page(self):
+        self.GamePage = GamePage()
+        self.GameHome = GameHome()
+        page = "通关弹窗"
+        level = "2000"
+        self.unlock(page, level)
+        self.GamePage.congratulation_back_home()
+        self.GameHome.get_level("20").goto_game_page()
+
+    # def test39_back_page(self):
+    #     """
+    #     调整三天，获得回归弹窗
+    #     :return:
+    #     """
+    #     three_day = [788, 1923]
+    #     package_name = "Water Sort"
+    #     page = "回归弹窗"
+    #     self.AdjustTime = AdjustTime()
+    #     stop_app("ios.water.sort.puzzle.inner")
+    #     self.AdjustTime.ios_setting().ios_generic().date_time()
+    #     self.sleep_time()
+    #     self.AdjustTime.ios_push_adjust_time(three_day)
+    #     self.ios_open_app(package_name)
+    #     self.sleep_time(3)
+    #     self.get_snapshot(page, self.name)

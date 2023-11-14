@@ -62,7 +62,7 @@ class GamePage(BaseElement):
         进入设置页面后，点击进入语言页面
         :return:
         """
-        self.image_click_coord(self.setting_language_button, [1061, 1897])
+        self.image_click_coord(self.setting_language_button, [934, 1650])
         self.sleep_time(2)
         return self
 
@@ -107,7 +107,7 @@ class GamePage(BaseElement):
         从设置页面进入收藏页面
         :return:
         """
-        self.image_click_coord(self.setting_collection_button, [1061, 1705])
+        self.image_click_coord(self.setting_collection_button, [943, 1485])
         self.sleep_time()
         return self
 
@@ -143,7 +143,7 @@ class GamePage(BaseElement):
         :return:
         """
         self.sleep_time()
-        self.image_click([570, 1106]).image_click([904, 1858]).image_click([1233, 1120]).image_click([1209, 1868])
+        self.image_click([493, 938]).image_click([769, 1628]).image_click([1076, 849]).image_click([1036, 1645])
         return self
 
     def close_debug(self):
@@ -154,7 +154,7 @@ class GamePage(BaseElement):
         self.image_click_plus(self.debug_close_button, [103, 172])
         return self
 
-    def debug_win(self, second=30):
+    def debug_win(self, second=40):
         """
         点击debug的win按钮会自动开始游戏，直到最后几步
         :return:
@@ -168,7 +168,7 @@ class GamePage(BaseElement):
         点击debug中的do_one按钮
         :return:
         """
-        for i in range(6):
+        for i in range(7):
             self.image_click(self.debug_doone_button)
             self.sleep_time(3)
         return self
@@ -178,7 +178,7 @@ class GamePage(BaseElement):
         获得奖励页面点击不，谢谢按钮
         :return:
         """
-        self.image_click([732, 2723])
+        self.image_click([640, 2464])
         self.sleep_time()
         return self
 
@@ -190,6 +190,13 @@ class GamePage(BaseElement):
         self.unlock_no_thanks().game_victory().close_debug().game_back_home()
         return self
 
+    def congratulation_back_home(self):
+        """
+        在通关弹窗返回到首页
+        :return:
+        """
+        self.image_click([631, 2170])
+        return self
 
 if __name__ == "__main__":
     if not cli_setup():

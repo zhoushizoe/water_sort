@@ -3,13 +3,14 @@
 # File: policy_page.py
 # Time: 2023/10/16 2:19 下午
 from ws_base.base_ws import BaseElement
+from ws_base.base_ws import IosBaseElement
 from airtest.core.api import *
 from airtest.cli.parser import cli_setup
 from ws_base.app_base_ws import WaterSortApp
 from ws_page.guidance_page import NewGuidance
 
 
-class PolicyPage(BaseElement, WaterSortApp):
+class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
     """
     首次打开游戏，进入隐私弹窗页面
     """
@@ -27,10 +28,11 @@ class PolicyPage(BaseElement, WaterSortApp):
                                  resolution=(1440, 3088))
 
     water_sort_ios_package = 'ios.water.sort.puzzle.inner'
-    water_sort_ios_install = r"/Users/amber/Downloads/1108_1153/WaterSort.ipa"
+    water_sort_ios_install = r"/Users/amber/Downloads/1108_1840/WaterSort.ipa"
     water_sort_android = "water.sort.puzzle.android.inner"
+    package_name = "Water Sort"
 
-    def first_start_ws(self):
+    def first_start_ios(self):
         """
         iOS的首次打开游戏，弹出隐私弹窗
         :return:
@@ -41,7 +43,13 @@ class PolicyPage(BaseElement, WaterSortApp):
         # 安装iOS包
         self.install_ios(self.water_sort_ios_install)
         # 首次打开iOS包
-        self.sleep_time(10)
+        self.ios_open_app(self.package_name)
+        self.sleep_time()
+        self.image_click([644, 1739])
+        self.sleep_time()
+        self.image_click([640, 1570])
+        self.sleep_time()
+        self.image_click([644, 1570])
         return self
 
     def first_start_android(self):

@@ -3,11 +3,12 @@
 # File: game_home_page.py
 # Time: 2023/10/18 5:20 下午
 from ws_base.base_ws import BaseElement
+from ws_base.base_ws import IosBaseElement
 from airtest.core.api import *
 from airtest.cli.parser import cli_setup
 
 
-class GameHome(BaseElement):
+class GameHome(BaseElement,IosBaseElement):
     game_icon = Template(r"../picture/home_page_picture/game_icon.png", record_pos=(-0.03, -0.238),
                          resolution=(1096, 2560))
     debug_passward = Template(r"../picture/home_page_picture/debug_passward.png", record_pos=(-0.08, -0.422),
@@ -45,13 +46,12 @@ class GameHome(BaseElement):
         # if exists(self.game_icon):
         #     self.image_click(self.game_icon, times=7)
         # else:
-        self.image_click([722, 1253], times=7)
-
+        #     self.image_click([622, 1085], times=10)
         self.sleep_time(1)
         self.image_click_plus(self.input_fields, [462, 167])
         self.image_click_plus(self.debug_passward, [619, 1002])
         self.image_click_plus(self.debug_close_button, [702, 1312])
-        self.image_click_plus(self.debug_close_button, [702, 850])
+        # self.image_click_plus(self.debug_close_button, [702, 850])
         return self
 
     def get_level(self, level):
@@ -60,15 +60,15 @@ class GameHome(BaseElement):
         :param level:希望的关卡
         :return:
         """
-        self.image_click_plus(self.input_fields, [462, 167])
+        self.image_click_plus(self.input_fields, [404, 173])
         self.sleep_time(1)
-        self.image_click_plus(self.debug_level, [619, 997])
+        self.image_click([529, 840])
         self.sleep_time(1)
-        for i in range(3):
-            self.delete_word()
-        self.input_word(level)
+        for i in range(4):
+            self.ios_delete_text()
+        self.ios_inter_word(level)
         self.sleep_time(1)
-        self.image_click_plus(self.dubug_yes, [1290, 2801])
+        self.image_click([822, 1819])
         self.sleep_time(1)
         self.image_click(self.debug_close_button)
         self.sleep_time()
@@ -123,5 +123,5 @@ class GameHome(BaseElement):
 if __name__ == "__main__":
     if not cli_setup():
         auto_setup(__file__, logdir=True, devices=[
-            "android://127.0.0.1:5037/R3CW10C3D9N?cap_method=MINICAP&touch_method=MAXTOUCH&", ])
-    GameHome().expand_debug()
+            "ios:///http://127.0.0.1:8300", ])
+    GameHome().get_debug()
