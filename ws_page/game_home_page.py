@@ -68,7 +68,7 @@ class GameHome(BaseElement,IosBaseElement):
             self.ios_delete_text()
         self.ios_inter_word(level)
         self.sleep_time(1)
-        self.image_click([822, 1819])
+        # self.image_click([822, 1819])
         self.sleep_time(1)
         self.image_click(self.debug_close_button)
         self.sleep_time()

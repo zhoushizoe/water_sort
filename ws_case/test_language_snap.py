@@ -22,7 +22,7 @@ ST.SNAPSHOT_QUALITY = 90
 class TestWatertLanguage(BaseElement, IosBaseElement):
     auto_setup(__file__, logdir=True,
                devices=["ios:///http://127.0.0.1:8300", ])
-    language = "test_ios"
+    language = "德语iphone"
     name = rf"{language}/{language}"
 
     def file_path(self, folder_name):
@@ -55,7 +55,7 @@ class TestWatertLanguage(BaseElement, IosBaseElement):
         self.file_path(self.name)
         self.PolicyPage.first_start_ios()
         filename = "隐私弹窗"
-        self.sleep_time()
+        self.sleep_time(20)
         self.get_snapshot(filename, self.name)
         return self
 
@@ -199,10 +199,10 @@ class TestWatertLanguage(BaseElement, IosBaseElement):
         level = "20"
         self.unlock(page, level)
 
-    def test12_unlock(self):
-        page = "柠檬鸡尾酒解锁"
-        level = "24"
-        self.unlock(page, level)
+    # def test12_unlock(self):
+    #     page = "柠檬鸡尾酒解锁"
+    #     level = "25"
+    #     self.unlock(page, level)
 
     def test13_unlock(self):
         page = "薰衣草田"

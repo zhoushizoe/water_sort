@@ -28,7 +28,7 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
                                  resolution=(1440, 3088))
 
     water_sort_ios_package = 'ios.water.sort.puzzle.inner'
-    water_sort_ios_install = r"/Users/amber/Downloads/1108_1840/WaterSort.ipa"
+    water_sort_ios_install = r"/Users/amber/Downloads/ColorBlast.ipa"
     water_sort_android = "water.sort.puzzle.android.inner"
     package_name = "Water Sort"
 
@@ -45,11 +45,11 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
         # 首次打开iOS包
         self.ios_open_app(self.package_name)
         self.sleep_time()
-        self.image_click([644, 1739])
-        self.sleep_time()
-        self.image_click([640, 1570])
-        self.sleep_time()
-        self.image_click([644, 1570])
+        # self.image_click([644, 1739])
+        # self.sleep_time()
+        # self.image_click([640, 1570])
+        # self.sleep_time()
+        # self.image_click([644, 1570])
         return self
 
     def first_start_android(self):
