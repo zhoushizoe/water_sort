@@ -1,0 +1,106 @@
+# 首次打开游戏
+app_first_open: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : app_first_open =>"
+# 隐私弹窗展示
+privacy_pv:  "A_ANALYSIS : FIREBASE     : EVENT_SEND       : privacy_pv =>"
+# 点击服务协议
+terms_of_service_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : terms_of_service_click =>"
+# 点击隐私协议
+privacy_policy_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : privacy_policy_click =>"
+# 在隐私弹窗页面点击同意按钮
+privacy_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : privacy_click =>"
+# 打开游戏（非首次）
+app_open: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : app_open =>"
+# 退出游戏，游戏从前台到后台，包括杀进程
+app_quit: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : app_quit =>"
+# 杀掉游戏进程
+app_kill: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : app_kill =>"
+# 游戏初始化
+app_init: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : app_init =>"
+# 玩家开始新的一局
+game_new_start: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : game_new_start"
+# 玩家从后台回来，继续游戏
+game_continue: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : game_continue"
+# 同色收集完成,每一个颜色收集完成时上报
+same_color_finish: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : same_color_finish"
+#关卡胜利	关卡胜利最后一步的球移动完，礼花特效结束时上报
+game_win: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : game_win"
+# 首页展示	首页展示时上报
+home_page: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : home_page"
+# 首页点击Play	首页点击level开始游戏
+home_play_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : home_play_click"
+# 关卡重开	关卡重开时上报
+game_restart: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : game_restart"
+# 游戏操作	玩家发生游玩操作时上报
+game_action: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : game_action"
+# 道具点击	玩家点击道具button时上报
+item_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : item_click"
+# 获得道具	每次玩家获得道具，数量增加时上报
+get_item: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : get_item"
+# 道具使用成功	玩家发生道具使用时上报
+item_action: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : item_action"
+# 特殊关点击退出弹窗展示	特殊关点击退出弹窗展示时上报
+special_quit_show: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : special_quit_show"
+# 特殊关点击退出弹窗展示	点击特殊关退出弹窗
+special_quit_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : special_quit_click"
+# 加金币成功	玩家看完激励，成功获得加金币奖励时上报
+add_coin_success: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : add_coin_success"
+# 关卡宝箱展示	关卡宝箱页开始展示时上报
+level_chest_show: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : level_chest_show"
+# 关卡宝箱打开	关卡宝箱页打开时上报
+level_chest_open: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : level_chest_open"
+# 关卡宝箱奖励获取	"关卡宝箱奖励成功获取时上报
+level_chest_reward_get: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : level_chest_reward_get"
+# 宝箱奖励领取	点击宝箱奖励按钮时点击
+level_chest_claim: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : level_chest_claim"
+# 收藏界面展示	收藏界面展示时上报
+collection_pv: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : collection_pv"
+# 更换背景	点击更换背景成功时上报
+theme_change_success: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : theme_change_success"
+# 更换管子	点击更换管子成功时上报
+tube_change_success: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : tube_change_success"
+# 更换球	点击更换球成功时上报
+ball_change_success: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : ball_change_success"
+# 点击加金币	点击底部加金币按钮时上报
+add_coin_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : add_coin_click"
+# 买皮肤	点击购买管皮肤/主题/球皮肤时上报
+buy_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : buy_click"
+# 奖品弹窗	皮肤奖励弹窗展示
+collection_award_popup: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : collection_award_popup"
+# 奖品弹窗点击	皮肤奖励弹窗点击
+collection_award_popup_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : collection_award_popup_click"
+# 点击获得新皮肤（未成功）	点击奖励弹窗现在使用，或者商城页点击获得时上报
+click_get_new_skin: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : click_get_new_skin"
+# 成功获得新皮肤	点击奖励弹窗现在使用，或者商城页点击获得时上报
+get_new_skin: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : get_new_skin"
+# 设置弹窗展示	设置弹窗展示时上报
+settings_pv: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : settings_pv"
+# 打开/关闭音效	设置弹窗点击音效开关时上报
+settings_sound: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : settings_sound"
+# 打开/关闭振动	设置弹窗点击振动开关时上报
+settings_vibration: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : settings_vibration"
+# 从设置打开商店页	设置点击商店入口时上报
+settings_shop_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : settings_shop_click"
+# 联系我们	设置弹窗点击contact时上报
+settings_contact: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : settings_contact"
+# 语言选择	设置弹窗修改语言时上报
+settings_language: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : settings_language"
+# 评分引导弹窗展示	评分引导弹窗展示时上报
+rating_guide_pv: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : rating_guide_pv"
+# 评分引导弹窗点击	评分引导弹窗点击时上报
+rating_guide_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : rating_guide_click"
+# 游戏中返回主页	游戏设置点击home时上报
+home_back_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : home_back_click"
+# 加道具弹窗展示	加道具弹窗展示时上报
+add_item_pop_show: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : add_item_pop_show"
+# 加道具弹窗点击	点击加道具弹窗时上报
+add_item_pop_click: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : add_item_pop_click"
+# 加金币弹窗展示
+get_coins_popshow: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : get_coins_popshow"
+# 加金币弹窗点击
+get_coins_popshowclick: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : get_coins_popshowclick"
+# 用户最大开局关卡	game_win时刷新
+max_start_level: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : max_start_level"
+# 玩家当前皮肤	初始化时，和有皮肤变更时
+skin_mode: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : skin_mode"
+# 玩家当前拥有资源	玩家资源数量变更时
+resource_hold: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : resource_hold"
