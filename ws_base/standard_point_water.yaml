@@ -104,3 +104,39 @@ max_start_level: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : max_start_l
 skin_mode: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : skin_mode"
 # 玩家当前拥有资源	玩家资源数量变更时
 resource_hold: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : resource_hold"
+# 打开/关闭音乐	设置弹窗点击音乐开关时上报
+settings_music: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : settings_music"
+# 打开/关闭瓶盖	设置弹窗点击瓶盖开关时上报
+settings_tops: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : settings_tops"
+# 更换瓶子	点击更换瓶子时上报
+collection_tube: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : collection_tube"
+# 更换背景	点击更换背景时上报
+collection_theme: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : collection_theme"
+# 评分反馈	好评弹窗点击反馈和关闭按钮上报
+rate_score: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : rate_score"
+# 章节宝箱	章节宝箱出现，点击关闭
+levelchest_show: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : levelchest_show"
+# 购买失败 	公共库事件
+iap_purchase_failed: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : iap_purchase_failed"
+# 购买成功 	公共库事件
+iap_purchase_success: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : iap_purchase_success"
+# 回归弹窗展示	用户展示回归弹窗时上报
+backpop_show: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : backpop_show"
+# 金币增加	金币数量增加时上报
+coin_increase: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : coin_increase"
+# 金币减少	金币数量减少时上报
+coin_decrease: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : coin_decrease"
+# 无法移动	玩家操作触发无法移动提示时上报
+game_nomove: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : game_nomove"
+# 撤回道具持有数	道具数量变动时刷新	1：当前撤回道具数量为1
+item_undo_num: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : item_undo_num"
+# 加水瓶道具持有数	道具数量变动时刷新
+item_tube_num: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : item_tube_num"
+# 用户内购次数	用户成功内购时
+iap_times: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : iap_times"
+# 用户内购总价值（单位为美元）	用户成功内购时
+iap_totalvalue: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : iap_totalvalue"
+# 当前金币持有数	金币数量发生变动时
+coin_hold_num: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : coin_hold_num"
+# 累计消耗金币数	金币数量减少时
+coin_cost_num: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : coin_cost_num"

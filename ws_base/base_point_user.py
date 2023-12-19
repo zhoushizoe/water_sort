@@ -34,7 +34,7 @@ class GetPointUser:
         取出对应的埋点，得到需要过滤的信息
         :return:
         """
-        with open(r"/Users/amber/PycharmProjects/Sortball_副本/base/standard_point.yaml", "r", encoding="utf-8") as f:
+        with open(r"/Users/amber/PycharmProjects/Water Sort/ws_base/standard_point_water.yaml", "r", encoding="utf-8") as f:
             all_data = yaml.safe_load(f)
             get_data = all_data[key]
             # print(get_data)
@@ -52,7 +52,6 @@ class GetPointUser:
         grep_output = grep_output.strip()
         print(grep_output)
         return grep_output
-
 
     def get_correct_log_user(self, key):
         """
@@ -78,13 +77,13 @@ class GetPointUser:
     #     with open("contrast.yaml", "a", encoding="utf-8") as f:
     #         yaml.dump(self.get_correct_log(key), f)
 
-    def write_contrast2(self, key):
+    def write_contrast2_for_user(self, key):
         """
         将正确的数据写入文件中
         :param key:
         :return:
         """
-        with open("test.txt", "a", encoding="utf-8") as f:
+        with open("test1.txt", "a", encoding="utf-8") as f:
             f.write(self.get_correct_log_user(key) + "\n")
         return self
 
@@ -97,7 +96,7 @@ class GetPointUser:
         self.read_point(key)
         self.output_command(key)
         self.get_correct_log_user(key)
-        self.write_contrast2(key)
+        self.write_contrast2_for_user(key)
 
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ from airtest.core.api import *
 from airtest.cli.parser import cli_setup
 
 
-class GameHome(BaseElement,IosBaseElement):
+class GameHome(BaseElement, IosBaseElement):
     game_icon = Template(r"../picture/home_page_picture/game_icon.png", record_pos=(-0.03, -0.238),
                          resolution=(1096, 2560))
     debug_passward = Template(r"../picture/home_page_picture/debug_passward.png", record_pos=(-0.08, -0.422),
@@ -36,22 +36,43 @@ class GameHome(BaseElement,IosBaseElement):
     expand_debug_button = Template(r"../picture/home_page_picture/expand_debug_button.png", target_pos=5,
                                    record_pos=(-0.468, -0.975),
                                    resolution=(1440, 3088))
+    # 首页的去广告button
+    ads_button = Template(r"../picture/home_page_picture/ads_button.png", record_pos=(-0.272, -0.929),
+                          resolution=(1440, 3088))
+    # 去广告内购的购买按钮
+    ads_buy_button = Template(r"../picture/home_page_picture/ads_buy_button.png", record_pos=(-0.022, 0.902),
+                              resolution=(1440, 3088))
+    # 回到首页按钮
+    goto_home_button = Template(r"../picture/game_page_picture/goto_home_button.png", record_pos=(-0.284, -1.094),
+                                resolution=(1096, 2560))
+    # 圣诞活动的点击button
+    christmas_button = Template(r"../picture/home_page_picture/christmas_button.png", target_pos=6,
+                                record_pos=(-0.229, 0.308), resolution=(1440, 3088))
+    # 首页获得金币按钮
+    home_get_coin_button = Template(r"../picture/home_page_picture/home_get_coin_button.png",
+                                    record_pos=(0.201, -0.928), resolution=(1440, 3088))
+    # 获得金币弹窗按钮
+    ad_get_coin = Template(r"../picture/home_page_picture/ad_get_coin.png", record_pos=(0.01, 0.221),
+                           resolution=(1440, 3088))
+
+    def __init__(self, poco):
+        self.BasePoco = poco
 
     def get_debug(self):
         """
         在游戏首页开启debug并回到首页
         :return:
         """
-        self.sleep_time(4)
+        # self.sleep_time(4)
         # if exists(self.game_icon):
         #     self.image_click(self.game_icon, times=7)
         # else:
-        #     self.image_click([622, 1085], times=10)
+        self.image_click([622, 1085], times=10)
         self.sleep_time(1)
         self.image_click_plus(self.input_fields, [462, 167])
         self.image_click_plus(self.debug_passward, [619, 1002])
         self.image_click_plus(self.debug_close_button, [702, 1312])
-        # self.image_click_plus(self.debug_close_button, [702, 850])
+        self.image_click_plus(self.debug_close_button, [702, 850])
         return self
 
     def get_level(self, level):
@@ -60,17 +81,37 @@ class GameHome(BaseElement,IosBaseElement):
         :param level:希望的关卡
         :return:
         """
-        self.image_click_plus(self.input_fields, [404, 173])
+        self.image_click_plus(self.input_fields, [339, 172])
         self.sleep_time(1)
-        self.image_click([529, 840])
+        self.image_click([599, 973])
         self.sleep_time(1)
         for i in range(4):
-            self.ios_delete_text()
-        self.ios_inter_word(level)
+            self.delete_word()
+        self.input_word(level)
         self.sleep_time(1)
         # self.image_click([822, 1819])
         self.sleep_time(1)
-        self.image_click(self.debug_close_button)
+        self.image_click(self.debug_close_button, times=2)
+        self.sleep_time()
+        return self
+
+    def debug_get_coin(self, coin):
+        """
+        开启debug后，进入debug，得到想要的关卡
+        :param coin: 想要的金币数量
+        :return:
+        """
+        self.image_click_plus(self.input_fields, [404, 173])
+        self.sleep_time(1)
+        self.image_click([1007, 988])
+        self.sleep_time(1)
+        for i in range(4):
+            self.delete_word()
+        self.input_word(coin)
+        self.sleep_time(1)
+        # self.image_click([822, 1819])
+        self.sleep_time(1)
+        self.image_click(self.debug_close_button, times=2)
         self.sleep_time()
         return self
 
@@ -119,9 +160,54 @@ class GameHome(BaseElement,IosBaseElement):
         self.sleep_time()
         return self
 
+    def goto_ads_page(self):
+        """
+        进入广告购买弹窗
+        :return:
+        """
+        self.image_click(self.ads_button)
+        return self
+
+    def purchase_click(self):
+        """
+        点击内购购买按钮
+        :return:
+        """
+        self.image_click(self.ads_buy_button)
+        return self
+
+    def christmas_activities_start(self):
+        """
+        圣诞活动期间弹出活动弹窗，点击确认
+        :return:
+        """
+        button_ok = "Button_OK"
+        if exists(self.christmas_button):
+            self.image_click(self.christmas_button)
+            self.image_click(self.christmas_button)
+        if exists(self.goto_home_button):
+            self.image_click(self.goto_home_button)
+        return self
+
+    def get_coin(self):
+        """
+        在首页点击获得金币按钮
+        :return:
+        """
+        self.image_click(self.home_get_coin_button)
+        return self
+
+    def ad_get_coins(self):
+        """
+        在获得金币的弹窗点击获得金币
+        :return:
+        """
+        self.image_click(self.ad_get_coin)
+        return self
+
 
 if __name__ == "__main__":
     if not cli_setup():
         auto_setup(__file__, logdir=True, devices=[
-            "ios:///http://127.0.0.1:8300", ])
-    GameHome().get_debug()
+            "android://127.0.0.1:5037/R3CW10C3D9N?cap_method=MINICAP&touch_method=MAXTOUCH&", ])
+    GameHome().christmas_activities_start()

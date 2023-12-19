@@ -8,7 +8,7 @@ from airtest.core.api import *
 import yaml
 
 
-class GetPoint:
+class GetPointWater:
     """
     1.前置条件
     2.清除数据
@@ -38,7 +38,7 @@ class GetPoint:
         取出对应的埋点，得到需要过滤的信息
         :return:
         """
-        with open(r"/Users/amber/PycharmProjects/Water Sort/ws_base/standard_point.yaml", "r", encoding="utf-8") as f:
+        with open(r"/Users/amber/PycharmProjects/Water Sort/ws_base/standard_point_water.yaml", "r", encoding="utf-8") as f:
             all_data = yaml.safe_load(f)
             get_data = all_data[key]
             print(get_data)
@@ -102,4 +102,4 @@ class GetPoint:
 
 
 if __name__ == "__main__":
-    GetPoint().contrast_step("app_first_open")
+    GetPoint().read_point("settings_music")

@@ -15,6 +15,9 @@ class NewGuidance(BaseElement):
                              record_pos=(-0.192, -0.05),
                              resolution=(1440, 3088))
 
+    def __init__(self, poco):
+        self.BasePoco = poco
+
     def first_guidance_step1(self):
         """
         点击第一个管

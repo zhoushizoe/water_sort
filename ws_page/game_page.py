@@ -1,7 +1,6 @@
 from ws_base.base_ws import BaseElement
 from airtest.core.api import *
 from airtest.cli.parser import cli_setup
-
 from ws_page.game_home_page import GameHome
 
 
@@ -39,6 +38,30 @@ class GamePage(BaseElement):
     # debug中的最后几步操作按钮
     debug_doone_button = Template(r"../picture/game_page_picture/debug_doone_button.png", record_pos=(0.295, -0.957),
                                   resolution=(1440, 3088))
+    # 结算页面的下一关按钮
+    victory_english_button = Template(r"../picture/game_page_picture/victory_english_button.png",
+                                      record_pos=(-0.01, 0.638),
+                                      resolution=(1440, 3088))
+
+    # 广告关闭按钮
+    ad_close_button = Template(r"../picture/game_page_picture/ad_close_button.png", record_pos=(0.454, -0.953),
+                               resolution=(1440, 3088))
+
+    # 开启宝箱，看广告获得双倍
+    double_ad_button = Template(r"../picture/game_page_picture/double_ad_button.png", record_pos=(-0.154, 0.422),
+                                resolution=(1440, 3088))
+    # 重开道具按钮
+    tool_restart_button = Template(r"../picture/game_page_picture/tool_restart_button.png", record_pos=(-0.326, 0.778),
+                                   resolution=(1440, 3088))
+    # 提示道具按钮
+    tool_doone_button = Template(r"../picture/game_page_picture/tool_doone_button.png", record_pos=(0.109, 0.779),
+                                 resolution=(1440, 3088))
+    # 加管道具按钮
+    tool_add_tube_button = Template(r"../picture/game_page_picture/tool_add_tube_button.png", record_pos=(0.329, 0.781),
+                                    resolution=(1440, 3088))
+
+    def __init__(self, poco):
+        self.BasePoco = poco
 
     def game_victory(self):
         """
@@ -57,6 +80,42 @@ class GamePage(BaseElement):
         self.sleep_time(1)
         return self
 
+    def click_music(self):
+        """
+        poco的方式点击音乐按钮
+        :return:
+        """
+        Music_Switch = "MusicSwitch"
+        self.BasePoco.unity_poco_click(Music_Switch)
+        return self
+
+    def click_sound(self):
+        """
+        poco的方式点击音效按钮
+        :return:
+        """
+        Sound_Switch = "SoundSwitch"
+        self.BasePoco.unity_poco_click(Sound_Switch)
+        return self
+
+    def click_vibration(self):
+        """
+        poco的方式点击震动
+        :return:
+        """
+        Vibrate_Switch = "VibrateSwitch"
+        self.BasePoco.unity_poco_click(Vibrate_Switch)
+        return self
+
+    def click_tops(self):
+        """
+        poco的方式点击瓶盖开关
+        :return:
+        """
+        Tops_Switch = "TopsSwitch"
+        self.BasePoco.unity_poco_click(Tops_Switch)
+        return self
+
     def goto_language_page(self):
         """
         进入设置页面后，点击进入语言页面
@@ -66,6 +125,26 @@ class GamePage(BaseElement):
         self.sleep_time(2)
         return self
 
+    def poco_goto_language(self):
+        """
+        使用poco的方法在设置页面进入语言页面
+        :return:
+        """
+        element = "UI_MainMenuSetting(Clone)"
+        offspring1 = "LanguageButton"
+        offspring2 = "Button"
+        self.BasePoco.poco_offspring_click(element, offspring1, offspring2)
+        return self
+
+    def poco_change_french(self):
+        """
+        切换法语
+        :return:
+        """
+        french = "SelectionLanguageButton_Item (1)"
+        self.BasePoco.unity_poco_click(french)
+        return self
+
     def language_setting_close(self):
         """
         点击语言页面的关闭按钮
@@ -73,6 +152,14 @@ class GamePage(BaseElement):
         """
         self.image_click_plus(self.setting_close_button, [1214, 702])
         self.sleep_time(2)
+        return self
+
+    def language_confirm(self):
+        """
+        语言页面的确定按钮
+        :return:
+        """
+        self.BasePoco.UnityPoco("UI_LanguageSetting(Clone)").offspring("Button").click()
         return self
 
     def setting_close(self):
@@ -94,6 +181,14 @@ class GamePage(BaseElement):
         self.system_keyevent("BACK")
         return self
 
+    def poco_goto_contact(self):
+        """
+        poco的方式进入邮件页面
+        :return:
+        """
+        self.BasePoco.UnityPoco("UI_MainMenuSetting(Clone)").offspring("ContactButton").offspring("Button_Base").click()
+        return self
+
     def contact_goto_setting(self):
         """
         从邮箱页面回到设置页面，点击物理back键就可以(仅安卓)
@@ -107,7 +202,7 @@ class GamePage(BaseElement):
         从设置页面进入收藏页面
         :return:
         """
-        self.image_click_coord(self.setting_collection_button, [943, 1485])
+        self.image_click_coord(self.setting_collection_button, [1061, 1700])
         self.sleep_time()
         return self
 
@@ -173,13 +268,27 @@ class GamePage(BaseElement):
             self.sleep_time(3)
         return self
 
+    def debug_doone(self):
+        self.image_click(self.debug_doone_button)
+        return self
+
     def unlock_no_thanks(self):
         """
         获得奖励页面点击不，谢谢按钮
         :return:
         """
-        self.image_click([640, 2464])
+        self.image_click([722, 2374])
         self.sleep_time()
+        return self
+
+    def unlock_button_ad(self):
+        """
+        在获得宝箱的页面点击claim x2
+        :return:
+        """
+        # Button_AD = "Button_AD"
+        # self.BasePoco.unity_poco_click(Button_AD)
+        self.image_click(self.double_ad_button)
         return self
 
     def unlock_step(self):
@@ -198,8 +307,80 @@ class GamePage(BaseElement):
         self.image_click([631, 2170])
         return self
 
+    def rate_us_close(self):
+        """
+        评分引导页面点击关闭按钮
+        :return:
+        """
+        close_button = "Button_Close"
+        self.BasePoco.unity_poco_click(close_button)
+        return self
+
+    def rate_us_one_star(self):
+        """
+        点击评分引导一颗星星
+        :return:
+        """
+        self.image_click([363, 1504])
+        return self
+
+    def rate_us_five_star(self):
+        """
+        点击评分引导五颗星星
+        :return:
+        """
+        self.image_click([1150, 1484])
+        return self
+
+    def rate_us_feedback(self):
+        """
+        点击评分引导反馈按钮
+        :return:
+        """
+        Button_OK = "Button_OK"
+        self.image_click([712, 1818])
+        return self
+
+    def ad_close(self):
+        self.sleep_time(4)
+        if exists(self.victory_english_button):
+            return self
+        else:
+            self.sleep_time(15)
+            if exists(self.ad_close_button):
+                self.image_click(self.ad_close_button)
+            else:
+                self.system_keyevent("BACK")
+                self.image_click([1384, 152])
+        return self
+
+    def tool_restart_click(self):
+        """
+        点击重开道具
+        :return:
+        """
+        self.image_click(self.tool_restart_button)
+        return self
+
+    def tool_doone_click(self):
+        """
+        点击提示道具
+        :return:
+        """
+        self.image_click_plus(self.tool_doone_button, [889, 2630])
+        return self
+
+    def tool_add_tube_click(self):
+        """
+        点击加管道具
+        :return:
+        """
+        self.image_click_plus(self.tool_add_tube_button, [1204, 2644])
+        return self
+
+
 if __name__ == "__main__":
     if not cli_setup():
         auto_setup(__file__, logdir=True, devices=[
             "android://127.0.0.1:5037/R3CW10C3D9N?cap_method=MINICAP&touch_method=MAXTOUCH&", ])
-    GamePage().unlock_step()
+    GamePage().rate_us_close()

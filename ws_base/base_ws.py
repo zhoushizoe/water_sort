@@ -9,9 +9,12 @@
 from airtest.cli.parser import cli_setup
 from airtest.core.api import *
 from poco.drivers.ios import iosPoco
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 
 class BaseElement:
+    # def __init__(self):
+    #     unity_poco = UnityPoco()
 
     def clear_app(self, package):
         """
@@ -66,6 +69,16 @@ class BaseElement:
         """
         touch(image, times)
         return self
+
+    # def poco_click(self, element):
+    #     """
+    #     使用poco元素点击
+    #     :param element:
+    #     :return:
+    #     """
+    #     poco = UnityPoco()
+    #     poco(element).click()
+    #     return self
 
         # 使用图像识别拖动
 
@@ -156,6 +169,7 @@ class BaseElement:
         :param coordinate:坐标
         :return:
         """
+        wait(image)
         if exists(image):
             self.image_click(image)
         else:
@@ -180,6 +194,44 @@ class BaseElement:
             self.image_click(coord)
         return self
 
+    def assert_poco(self, image, element, timeout=3):
+        """
+        如果存在poco元素，就进行点击，如果不存在，就进行图片点击
+        :param image:
+        :param element:
+        :return:
+        """
+        poco = AndroidUiautomationPoco(use_airtest_input=True, screenshot_each_action=False)
+        poco(element).wait(timeout)
+        if poco(element).exists():
+            poco(element).click()
+        else:
+            self.image_click(image)
+        return self
+
+    def wait_image(self, image):
+        """
+        等待某个图片出现
+        :param image:
+        :return:
+        """
+        wait(image)
+        return self
+
+    # def wait_poco(self, element, timeout=3):
+    #     """
+    #     等待三秒，出现对应的poco元素，如果出现就点击操作
+    #     :param element:
+    #     :param timeout:
+    #     :return:
+    #     """
+    #     poco = UnityPoco()
+    #     poco(element).wait(timeout).click()
+    #     return self
+
+
+
+
 
 class IosBaseElement:
     """
@@ -194,7 +246,7 @@ class IosBaseElement:
         text("\b", enter=False)
         return self
 
-    def ios_inter_word(self, word,enter=False):
+    def ios_inter_word(self, word, enter=False):
         """
           iOS的text()接口默认会在给定的输入字符后面加一个换行符 \n 。
           如果不想要输入之后出现换行的效果，可以把enter = False传到text()接口里面
@@ -228,5 +280,5 @@ if __name__ == "__main__":
     if not cli_setup():
         auto_setup(__file__, logdir=True, devices=[
             "ios:///http://127.0.0.1:8300", ])
-    poco = iosPoco()
-    IosBaseElement().ios_open_app("Water Sort")
+    # unity_poco = UnityPoco()
+    # BaseElement().assert_poco()

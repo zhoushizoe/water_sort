@@ -32,6 +32,9 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
     water_sort_android = "water.sort.puzzle.android.inner"
     package_name = "Water Sort"
 
+    def __init__(self, poco):
+        self.BasePoco = poco
+
     def first_start_ios(self):
         """
         iOS的首次打开游戏，弹出隐私弹窗
@@ -81,7 +84,7 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
         """
         self.image_click_plus(self.policy_iknow_button, [711, 1928])
         self.sleep_time()
-        return NewGuidance()
+        return NewGuidance
 
     # 关闭开启游戏时的日志弹窗
     def close_log(self):
@@ -89,7 +92,7 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
         安卓每次启动游戏都会有一个日志弹窗，没用，可以关闭
         :return:
         """
-        self.image_click_plus(self.close_log_listen, [137, 1405])
+        self.image_click_plus(self.close_log_listen, [471, 1381])
         return self
 
     # 点击进入tos隐私弹窗页面
@@ -117,12 +120,16 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
         从首次打开游戏到进入新手引导全流程
         :return:
         """
-        self.first_start_android().close_information_page().close_log().privicy_close().goto_guidance()
-        return NewGuidance()
+        self.first_start_android().close_information_page().close_log().goto_guidance()
+        return NewGuidance
 
+    # def test_poco(self):
+    #     element = "Button_Close"
+    #     self.wait_poco(element)
 
 if __name__ == "__main__":
     if not cli_setup():
         auto_setup(__file__, logdir=True, devices=[
-            "android://127.0.0.1:5037/R3CW10C3D9N?cap_method=MINICAP&touch_method=MAXTOUCH&", ])
-    PolicyPage().first_start_android().close_information_page().close_log().privicy_close().goto_guidance()
+            "android://127.0.0.1:5037/R3CW10C3D9N?cap_method=ADBCAP&touch_method=MAXTOUCH&", ])
+
+    # PolicyPage().test_poco()
