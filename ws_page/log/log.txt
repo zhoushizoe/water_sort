@@ -1,1 +1,0 @@
-{"tag": "function", "depth": 1, "time": 1702439310.507968, "data": {"name": "connect_device", "call_args": {"uri": "android://127.0.0.1:5037/R3CW10C3D9N?cap_method=MINICAP&touch_method=MAXTOUCH&"}, "start_time": 1702439310.427382, "ret": "<Android 'R3CW10C3D9N'>", "end_time": 1702439310.507953}}
