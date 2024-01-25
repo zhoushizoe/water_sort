@@ -140,3 +140,7 @@ iap_totalvalue: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : iap_totalval
 coin_hold_num: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : coin_hold_num"
 # 累计消耗金币数	金币数量减少时
 coin_cost_num: "A_ANALYSIS : FIREBASE     : USER_PROPERTY_SET    : coin_cost_num"
+# 从后台返回至游戏	玩家从后台返回至游戏时上报
+app_resume: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : app_resume"
+# 跳过关卡	玩家点击三次重开后触发跳过关卡按钮，并点击
+game_skip: "A_ANALYSIS : FIREBASE     : EVENT_SEND       : game_skip"

@@ -1,6 +1,7 @@
 from ws_base.base_ws import BaseElement
 from airtest.core.api import *
 from airtest.cli.parser import cli_setup
+from ws_base.base_poco import BasePoco
 
 
 class CollectPage(BaseElement):
@@ -9,8 +10,8 @@ class CollectPage(BaseElement):
     purchase_theme_1500_button = Template(r"../picture/collect_page_picture/purchase_theme_1500_button.png",
                                           record_pos=(0.327, 0.579), resolution=(1440, 3088))
 
-    def __init__(self, poco):
-        self.BasePoco = poco
+    # def __init__(self, poco):
+    #     self.BasePoco = poco
 
     def change_skin(self):
         """

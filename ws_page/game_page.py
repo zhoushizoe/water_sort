@@ -2,9 +2,10 @@ from ws_base.base_ws import BaseElement
 from airtest.core.api import *
 from airtest.cli.parser import cli_setup
 from ws_page.game_home_page import GameHome
+from ws_base.base_poco import BasePoco
 
 
-class GamePage(BaseElement):
+class GamePage(BaseElement, BasePoco):
     # 胜利弹窗下一关按钮
     victory_button = Template(r"../picture/game_page_picture/victory_next_button.png", target_pos=6,
                               record_pos=(-0.249, 0.581), resolution=(1440, 3088))
@@ -59,9 +60,40 @@ class GamePage(BaseElement):
     # 加管道具按钮
     tool_add_tube_button = Template(r"../picture/game_page_picture/tool_add_tube_button.png", record_pos=(0.329, 0.781),
                                     resolution=(1440, 3088))
+    # 跳关按钮
+    game_skip_button = Template(r"../picture/game_page_picture/game_skip_button.png", record_pos=(0.397, -0.796),
+                                resolution=(1440, 3088))
+    # 评分引导的不同星星表情
+    first_star_face = Template(r"../picture/game_page_picture/first_star_face.png", threshold=0.9,
+                               record_pos=(-0.006, -0.24), resolution=(1440, 3088))
+    second_star_face = Template(r"../picture/game_page_picture/second_star_face.png", threshold=0.9,
+                                record_pos=(0.0, -0.238), resolution=(1440, 3088))
+    third_star_face = Template(r"../picture/game_page_picture/third_star_face.png", threshold=0.9,
+                               record_pos=(0.005, -0.235),
+                               resolution=(1440, 3088))
+    fourth_star_Face = Template(r"../picture/game_page_picture/fourth_star_Face.png", threshold=0.9,
+                                record_pos=(0.005, -0.243),
+                                resolution=(1440, 3088))
+    fifth_star_face = Template(r"../picture/game_page_picture/fifth_star_face.png", threshold=0.9,
+                               record_pos=(-0.003, -0.245),
+                               resolution=(1440, 3088))
+    please_dont_delete = Template(r"../picture/game_page_picture/please_dont_delete.png", record_pos=(-0.067, -0.108),
+                                  resolution=(1440, 3088))
+    # gp页面的倒水icon
+    water_sort_icon = Template(r"../picture/game_page_picture/water_sort_icon.png", record_pos=(-0.344, -0.731),
+                               resolution=(1440, 3088))
+    # 瓶盖
+    tube_tops = Template(r"../picture/game_page_picture/tube_tops.png", record_pos=(0.393, -0.292),
+                         resolution=(1440, 3088))
+    # 设置页面瓶盖关闭
+    tops_close = Template(r"../picture/game_page_picture/tops_close.png", threshold=0.8, record_pos=(0.017, -0.028),
+                          resolution=(1440, 3088))
+    tops_open = Template(r"../picture/game_page_picture/tops_open.png", threshold=0.8, record_pos=(0.003, -0.015),
+                         resolution=(1440, 3088))
 
-    def __init__(self, poco):
-        self.BasePoco = poco
+    # 游戏中的banner关闭按钮
+    close_banner_button = Template(r"../picture/game_page_picture/close_banner_button.png", record_pos=(0.432, 0.889),
+                                   resolution=(1440, 3088))
 
     def game_victory(self):
         """
@@ -86,7 +118,7 @@ class GamePage(BaseElement):
         :return:
         """
         Music_Switch = "MusicSwitch"
-        self.BasePoco.unity_poco_click(Music_Switch)
+        self.unity_poco_click(Music_Switch)
         return self
 
     def click_sound(self):
@@ -95,7 +127,7 @@ class GamePage(BaseElement):
         :return:
         """
         Sound_Switch = "SoundSwitch"
-        self.BasePoco.unity_poco_click(Sound_Switch)
+        self.unity_poco_click(Sound_Switch)
         return self
 
     def click_vibration(self):
@@ -104,7 +136,7 @@ class GamePage(BaseElement):
         :return:
         """
         Vibrate_Switch = "VibrateSwitch"
-        self.BasePoco.unity_poco_click(Vibrate_Switch)
+        self.unity_poco_click(Vibrate_Switch)
         return self
 
     def click_tops(self):
@@ -113,7 +145,7 @@ class GamePage(BaseElement):
         :return:
         """
         Tops_Switch = "TopsSwitch"
-        self.BasePoco.unity_poco_click(Tops_Switch)
+        self.unity_poco_click(Tops_Switch)
         return self
 
     def goto_language_page(self):
@@ -133,7 +165,7 @@ class GamePage(BaseElement):
         element = "UI_MainMenuSetting(Clone)"
         offspring1 = "LanguageButton"
         offspring2 = "Button"
-        self.BasePoco.poco_offspring_click(element, offspring1, offspring2)
+        self.poco_offspring_click(element, offspring1, offspring2)
         return self
 
     def poco_change_french(self):
@@ -142,7 +174,7 @@ class GamePage(BaseElement):
         :return:
         """
         french = "SelectionLanguageButton_Item (1)"
-        self.BasePoco.unity_poco_click(french)
+        self.unity_poco_click(french)
         return self
 
     def language_setting_close(self):
@@ -159,7 +191,7 @@ class GamePage(BaseElement):
         语言页面的确定按钮
         :return:
         """
-        self.BasePoco.UnityPoco("UI_LanguageSetting(Clone)").offspring("Button").click()
+        self.UnityPoco("UI_LanguageSetting(Clone)").offspring("Button").click()
         return self
 
     def setting_close(self):
@@ -186,7 +218,7 @@ class GamePage(BaseElement):
         poco的方式进入邮件页面
         :return:
         """
-        self.BasePoco.UnityPoco("UI_MainMenuSetting(Clone)").offspring("ContactButton").offspring("Button_Base").click()
+        self.UnityPoco("UI_MainMenuSetting(Clone)").offspring("ContactButton").offspring("Button_Base").click()
         return self
 
     def contact_goto_setting(self):
@@ -270,6 +302,7 @@ class GamePage(BaseElement):
 
     def debug_doone(self):
         self.image_click(self.debug_doone_button)
+        self.sleep_time(1)
         return self
 
     def unlock_no_thanks(self):
@@ -313,7 +346,7 @@ class GamePage(BaseElement):
         :return:
         """
         close_button = "Button_Close"
-        self.BasePoco.unity_poco_click(close_button)
+        self.unity_poco_click(close_button)
         return self
 
     def rate_us_one_star(self):
@@ -376,6 +409,18 @@ class GamePage(BaseElement):
         :return:
         """
         self.image_click_plus(self.tool_add_tube_button, [1204, 2644])
+        return self
+
+    def game_skip(self):
+        """
+        点击跳关
+        :return:
+        """
+        self.image_click_plus(self.game_skip_button, [1220, 395])
+        return self
+
+    def close_banner(self):
+        self.image_click(self.close_banner_button)
         return self
 
 

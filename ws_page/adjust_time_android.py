@@ -16,7 +16,7 @@ class AdjustTime(BaseElement):
     # poco的set_date
     set_date = "Set date"
     # poco的日期调整：Saturday, December 30, 2023
-    december_30 = "Saturday, December 30, 2023"
+    december_30 = "Wednesday, January 31, 2024"
     # pcco的确定调整日期
     Done = "Done"
 

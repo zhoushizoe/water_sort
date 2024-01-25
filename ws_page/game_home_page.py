@@ -54,9 +54,18 @@ class GameHome(BaseElement, IosBaseElement):
     # 获得金币弹窗按钮
     ad_get_coin = Template(r"../picture/home_page_picture/ad_get_coin.png", record_pos=(0.01, 0.221),
                            resolution=(1440, 3088))
+    # 购买去广告弹窗页面层button
+    ads_purchase_usd_button = Template(r"../picture/home_page_picture/ads_purchase_usd_button.png",
+                                       record_pos=(-0.09, 0.444), resolution=(1440, 3088))
+    # 活动模式弹窗，go按钮
+    activicity_page_go_button = Template(r"../picture/home_page_picture/activicity_page_go_button.png",
+                                         record_pos=(0.003, 0.297), resolution=(1440, 3088))
+    # 游戏中的banner关闭按钮
+    close_banner_button = Template(r"../picture/home_page_picture/close_banner_button.png", record_pos=(0.432, 0.889),
+                                   resolution=(1440, 3088))
 
-    def __init__(self, poco):
-        self.BasePoco = poco
+    # def __init__(self, poco):
+    #     self.BasePoco = poco
 
     def get_debug(self):
         """
@@ -67,7 +76,7 @@ class GameHome(BaseElement, IosBaseElement):
         # if exists(self.game_icon):
         #     self.image_click(self.game_icon, times=7)
         # else:
-        self.image_click([622, 1085], times=10)
+        self.image_click([782, 1262], times=10)
         self.sleep_time(1)
         self.image_click_plus(self.input_fields, [462, 167])
         self.image_click_plus(self.debug_passward, [619, 1002])
@@ -168,6 +177,14 @@ class GameHome(BaseElement, IosBaseElement):
         self.image_click(self.ads_button)
         return self
 
+    def purchase_ads(self):
+        """
+        ads弹窗中点击购买按钮
+        :return:
+        """
+        self.image_click(self.ads_purchase_usd_button)
+        return self
+
     def purchase_click(self):
         """
         点击内购购买按钮
@@ -204,6 +221,16 @@ class GameHome(BaseElement, IosBaseElement):
         """
         self.image_click(self.ad_get_coin)
         return self
+
+    def activicity_page_go(self):
+        """
+        在弹出的活动弹窗上点击go
+        :return:
+        """
+        self.image_click(self.activicity_page_go_button)
+        return self
+
+
 
 
 if __name__ == "__main__":

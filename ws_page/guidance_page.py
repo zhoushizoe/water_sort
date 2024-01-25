@@ -14,16 +14,22 @@ class NewGuidance(BaseElement):
     guidance_tube = Template(r"../picture/guidance_page_picture/first_tube.png",
                              record_pos=(-0.192, -0.05),
                              resolution=(1440, 3088))
+    first_step = Template(r"../picture/guidance_page_picture/first_step.png", record_pos=(0.005, 0.583),
+                          resolution=(1440, 3088))
+    second_step = Template(r"../picture/guidance_page_picture/second_step.png", record_pos=(0.005, 0.576),
+                           resolution=(1440, 3088))
+    yes_and_no = Template(r"../picture/guidance_page_picture/yes_and_no.png", record_pos=(0.142, -0.402),
+                          resolution=(1440, 3088))
 
-    def __init__(self, poco):
-        self.BasePoco = poco
+    # def __init__(self, poco):
+    #     self.BasePoco = poco
 
     def first_guidance_step1(self):
         """
         点击第一个管
         :return:
         """
-        self.image_click_plus(self.guidance_tube, [408, 1445])
+        self.image_click([424, 1470])
         self.sleep_time(2)
         return self
 

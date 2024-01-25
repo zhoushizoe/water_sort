@@ -80,7 +80,7 @@ class BaseElement:
     #     poco(element).click()
     #     return self
 
-        # 使用图像识别拖动
+    # 使用图像识别拖动
 
     def image_swipe(self, place, to):
         """
@@ -229,8 +229,32 @@ class BaseElement:
     #     poco(element).wait(timeout).click()
     #     return self
 
+    def exists_assert(self, correct_result):
+        """
+        断言存在
+        :param correct_result:
+        :return:
+        """
+        try:
+            assert_exists(correct_result)
+            print(f"页面存在图片{correct_result}")
+        except AssertionError as e:
+            print(f"页面不存在图片{correct_result}")
+            raise e
 
+    def not_exists_assert(self, correct_result):
 
+        """
+        断言存在
+        :param correct_result:
+        :return:
+        """
+        try:
+            assert_not_exists(correct_result)
+            print(f"页面不存在图片{correct_result}")
+        except AssertionError as e:
+            print(f"页面存在图片{correct_result}")
+            raise e
 
 
 class IosBaseElement:

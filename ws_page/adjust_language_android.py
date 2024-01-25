@@ -12,15 +12,19 @@ class AdjustLanguage(BaseElement):
     coord1 = [1125, 2782]
     coord2 = [1017, 850]
 
-    def __init__(self, poco):
+    # def __init__(self, poco):
+    #     self.AdjustTime = AdjustTime()
+    #     self.BasePoco = BasePoco()
+    def get_adjust(self):
         self.AdjustTime = AdjustTime()
-        self.BasePoco = poco
 
     def goto_setting_page(self):
         """
         进入setting页面
         :return:
         """
+        self.AdjustTime = AdjustTime()
+        # self.BasePoco = poco
         self.AdjustTime.get_system_setting()
         return self
 
@@ -29,6 +33,7 @@ class AdjustLanguage(BaseElement):
         进入调整语言和日期的设置页面
         :return:
         """
+        self.AdjustTime = AdjustTime()
         self.AdjustTime.get_language()
         return self
 

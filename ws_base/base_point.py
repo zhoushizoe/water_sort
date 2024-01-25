@@ -66,15 +66,22 @@ class GetPointWater:
         raw_string = self.output_command(key)
         pattern = r'EVENT_SEND\s+:\s+(.*?)\s*lib_net_status:'
         # 使用正则表达式提取目标部分
-        match = re.search(pattern, raw_string)
-        if match:
-            extracted_content = match.group(1)
-            print(extracted_content)
-            extracted_string = extracted_content.strip()
+        # match = re.search(pattern, raw_string)
+        # if match:
+        #     extracted_content = match.group(1)
+        #     # print(extracted_content)
+        #     extracted_string = extracted_content.strip()
+        #     return extracted_string
+        # else:
+        #     print("没找到对应log")
+        matches = re.findall(pattern, raw_string)
+        if matches:
+            extracted_strings = [match.strip() for match in matches]
+            extracted_string = ' '.join(extracted_strings)
+            print(extracted_string)
             return extracted_string
         else:
             print("没找到对应log")
-
     # def write_contrast(self, key):
     #     with open("contrast.yaml", "a", encoding="utf-8") as f:
     #         yaml.dump(self.get_correct_log(key), f)

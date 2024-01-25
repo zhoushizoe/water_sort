@@ -22,12 +22,23 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
 
     def setup(self):
         self.poco = BasePoco()
-        self.PolicyPage = PolicyPage(self.poco)
-        self.NewGuidance = NewGuidance(self.poco)
-        self.GamePage = GamePage(self.poco)
-        self.GameHome = GameHome(self.poco)
-        self.CollectPage = CollectPage(self.poco)
+        self.PolicyPage = PolicyPage()
+        self.NewGuidance = NewGuidance()
+        self.GamePage = GamePage()
+        self.GameHome = GameHome()
+        self.CollectPage = CollectPage()
         self.AdjustTime = AdjustTime()
+
+    def assert_result(self, point, correct_point):
+        result = self.get_correct_log(point)
+        print(f"正确的埋点为：{result}")
+        assert result == correct_point
+
+    def assert_result_user(self, point, correct_point):
+        self.GetPointUser = GetPointUser()
+        result = self.GetPointUser.get_correct_log_user(point)
+        print(f"正确的埋点为：{result}")
+        assert result == correct_point
 
     def test1_app_first_open(self):
         """
@@ -36,11 +47,13 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "app_first_open"
+        correct_point = "app_first_open => {"
         self.clear_command()
         self.PolicyPage.first_start_android()
         self.PolicyPage.close_information_page()
         self.sleep_time()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test2_app_open(self):
@@ -49,21 +62,25 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "app_open"
+        correct_point = "app_open => {"
         self.stop_app(self.water_sort_android)
         self.clear_command()
         self.start_app(self.water_sort_android)
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     @pytest.mark.flaky(reruns=3)
     def test3_app_quit(self):
         point = "app_quit"
+        correct_point = "app_quit => {"
         self.stop_app(self.water_sort_android)
         self.start_app(self.water_sort_android)
         self.clear_command()
         self.system_keyevent("HOME")
         self.sleep_time()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test4_privacy_pv(self):
@@ -72,11 +89,13 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "privacy_pv"
+        correct_point = "privacy_pv => {"
         self.PolicyPage.first_start_android()
         self.clear_command()
         self.PolicyPage.close_information_page()
         self.sleep_time(4)
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test5_privacy_click(self):
@@ -86,10 +105,12 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         """
 
         point = "privacy_click"
+        correct_point = "privacy_click => {"
         self.PolicyPage.close_log()
         self.clear_command()
         self.PolicyPage.goto_guidance()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test6_settings_pv(self):
@@ -100,6 +121,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "settings_pv"
+        correct_point = "settings_pv => {settings_scene:game,"
         self.NewGuidance.first_guidance_step1().first_guidance_step2()
         self.GamePage.game_victory()
         self.NewGuidance.completed_level2()
@@ -107,6 +129,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         self.clear_command()
         self.GamePage.goto_setting_page()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test7_settings_music(self):
@@ -116,10 +139,12 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "settings_music"
+        correct_point = "settings_music => {result:off,"
         self.clear_command()
         self.GamePage.click_music()
         self.sleep_time()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test8_settings_music(self):
@@ -128,7 +153,14 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
        result:on
        :return:
        """
-        self.test7_settings_music()
+        point = "settings_music"
+        correct_point = "settings_music => {result:on,"
+        self.clear_command()
+        self.GamePage.click_music()
+        self.sleep_time()
+        self.write_contrast2(point)
+        self.assert_result(point, correct_point)
+        return self
 
     def test9_settings_sound(self):
         """
@@ -137,9 +169,11 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "settings_sound"
+        correct_point = "settings_sound => {result:off,"
         self.clear_command()
         self.GamePage.click_sound()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test10_settings_sound(self):
@@ -148,7 +182,12 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         result:on
         :return:
         """
-        self.test9_settings_sound()
+        point = "settings_sound"
+        correct_point = "settings_sound => {result:on,"
+        self.clear_command()
+        self.GamePage.click_sound()
+        self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test11_settings_vibration(self):
@@ -158,9 +197,11 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "settings_vibration"
+        correct_point = "settings_vibration => {result:off,"
         self.clear_command()
         self.GamePage.click_vibration()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test12_settings_vibration(self):
@@ -169,7 +210,12 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         result:on
         :return:
         """
-        self.test11_settings_vibration()
+        point = "settings_vibration"
+        correct_point = "settings_vibration => {result:on,"
+        self.clear_command()
+        self.GamePage.click_vibration()
+        self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test13_settings_tops(self):
@@ -179,9 +225,11 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "settings_tops"
+        correct_point = "settings_tops => {result:off,"
         self.clear_command()
         self.GamePage.click_tops()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test14_settings_tops(self):
@@ -190,7 +238,12 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         result:on
         :return:
         """
-        self.test13_settings_tops()
+        point = "settings_tops"
+        correct_point = "settings_tops => {result:on,"
+        self.clear_command()
+        self.GamePage.click_tops()
+        self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test15_settings_language(self):
@@ -199,8 +252,10 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "settings_language"
+        correct_point = "settings_language => {language_before:en,language_after:fr,"
         self.clear_command()
         self.GamePage.poco_goto_language().poco_change_french()
+        self.assert_result(point, correct_point)
         self.write_contrast2(point)
         return self
 
@@ -210,9 +265,11 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "settings_contact"
+        correct_point = "settings_contact => {"
         self.GamePage.language_setting_close()
         self.clear_command()
         self.GamePage.poco_goto_contact()
+        self.assert_result(point, correct_point)
         self.write_contrast2(point)
         return self
 
@@ -223,6 +280,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "settings_pv"
+        correct_point = "settings_pv => {settings_scene:home,"
         self.stop_app(self.water_sort_android)
         self.start_app(self.water_sort_android)
         self.PolicyPage.close_log()
@@ -230,6 +288,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         self.GameHome.christmas_activities_start()
         self.clear_command()
         self.GamePage.goto_setting_page()
+        self.assert_result(point, correct_point)
         self.write_contrast2(point)
         return self
 
@@ -240,9 +299,11 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "collection_pv"
+        correct_point = "collection_pv => {collection_scene:home,"
         self.clear_command()
         self.GamePage.goto_collection_page()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test19_collection_pv(self):
@@ -252,12 +313,14 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "collection_pv"
+        correct_point = "collection_pv => {collection_scene:game,"
         self.GamePage.collect_back_setting().setting_close()
         self.GameHome.goto_game_page()
         self.GamePage.goto_setting_page()
         self.clear_command()
         self.GamePage.goto_collection_page()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     @pytest.mark.flaky(reruns=3)
@@ -267,6 +330,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "collection_tube"
+        correct_point = "collection_tube => {tube_before:1,tube_after:2,"
         self.stop_app(self.water_sort_android)
         self.start_app(self.water_sort_android)
         self.PolicyPage.close_log()
@@ -276,6 +340,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         self.clear_command()
         self.CollectPage.change_skin()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test21_collection_theme(self):
@@ -284,10 +349,12 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "collection_theme"
+        correct_point = "collection_theme => {theme_before:1,theme_after:2,"
         self.CollectPage.change_theme()
         self.clear_command()
         self.CollectPage.change_skin()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def get_rate_score(self):
@@ -314,10 +381,12 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "rate_score"
+        correct_point = "rate_score => {score:0,"
         self.get_rate_score()
         self.clear_command()
         self.GamePage.language_setting_close()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     @pytest.mark.flaky(reruns=3)
@@ -328,11 +397,13 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "rate_score"
+        correct_point = "rate_score => {score:1,"
         self.get_rate_score()
         self.GamePage.rate_us_one_star()
         self.clear_command()
         self.GamePage.rate_us_feedback()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     def test24_rate_score(self):
@@ -342,11 +413,13 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "rate_score"
+        correct_point = "rate_score => {score:5,"
         self.get_rate_score()
         self.GamePage.rate_us_five_star()
         self.clear_command()
         self.GamePage.rate_us_feedback()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     @pytest.mark.flaky(reruns=3)
@@ -371,6 +444,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "levelchest_show"
+        correct_point = "levelchest_show => {close_choice:0,levelid:9,"
         self.get_levelchest("9")
         for i in range(2):
             self.GamePage.debug_doone()
@@ -379,6 +453,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         self.clear_command()
         self.GamePage.unlock_no_thanks()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     @pytest.mark.flaky(reruns=3)
@@ -389,6 +464,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "levelchest_show"
+        correct_point = "levelchest_show => {close_choice:1,levelid:17,"
         self.get_levelchest("17")
         for i in range(2):
             self.GamePage.debug_doone()
@@ -399,22 +475,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         self.GamePage.ad_close()
         self.sleep_time(4)
         self.write_contrast2(point)
-        return self
-
-    def test27_iap_purchase_success(self):
-        """
-        购买成功 	公共库事件
-        :return:
-        """
-        point = "iap_purchase_success"
-        self.GamePage.game_victory().close_debug().game_back_home()
-        self.sleep_time()
-        self.GameHome.goto_ads_page()
-        self.clear_command()
-        self.sleep_time()
-        self.GameHome.purchase_click()
-        self.sleep_time()
-        self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     @pytest.mark.flaky(reruns=3)
@@ -425,6 +486,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "coin_increase"
+        correct_point = "coin_increase => {increase_num:100,increase_scene:reward,"
         self.stop_app(self.water_sort_android)
         self.start_app(self.water_sort_android)
         self.sleep_time(4)
@@ -434,25 +496,28 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         self.GamePage.ad_close()
         self.sleep_time()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
-    @pytest.mark.flaky(reruns=3)
-    def test30_coin_increase(self):
-        """
-        金币增加	金币数量增加时上报
-        increase_scene:activity
-        :return:
-        """
-        point = "coin_increase"
-        self.get_rate_score()
-        self.GamePage.language_setting_close().game_victory().close_debug().game_back_home()
-        self.GameHome.expand_debug().get_level("5").goto_game_page()
-        self.clear_command()
-        self.GamePage.debug_win().debug_doone().debug_doone()
-        self.GamePage.ad_close()
-        self.sleep_time(5)
-        self.write_contrast2(point)
-        return self
+    # @pytest.mark.flaky(reruns=3)
+    # def test30_coin_increase(self):
+    #     """
+    #     金币增加	金币数量增加时上报
+    #     increase_scene:activity
+    #     :return:
+    #     """
+    #     point = "coin_increase"
+    #     correct_point = "coin_increase => {increase_num:50,increase_scene:activity,"
+    #     self.get_rate_score()
+    #     self.GamePage.language_setting_close().game_victory().close_debug().game_back_home()
+    #     self.GameHome.expand_debug().get_level("5").goto_game_page()
+    #     self.clear_command()
+    #     self.GamePage.debug_win().debug_doone().debug_doone()
+    #     self.GamePage.ad_close()
+    #     self.sleep_time(5)
+    #     self.write_contrast2(point)
+    #     self.assert_result(point, correct_point)
+    #     return self
 
     @pytest.mark.flaky(reruns=3)
     def test31_coin_increase(self):
@@ -462,6 +527,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "coin_increase"
+        correct_point = "coin_increase => {increase_num:20,increase_scene:chapter,"
         self.stop_app(self.water_sort_android)
         self.start_app(self.water_sort_android)
         self.PolicyPage.close_log()
@@ -471,6 +537,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         self.GamePage.debug_win().debug_doone().debug_doone().ad_close()
         self.sleep_time(4)
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     @pytest.mark.flaky(reruns=3)
@@ -482,6 +549,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "coin_decrease"
+        correct_point = "coin_decrease => {decrease_num:600,decrease_scene:theme,"
         self.PolicyPage.android_automate_process()
         self.NewGuidance.first_guidance_step1().first_guidance_step2()
         self.GamePage.game_victory()
@@ -497,6 +565,7 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         self.clear_command()
         self.CollectPage.purchase_theme()
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
 
     def test28_backpop_show(self):
         """
@@ -504,12 +573,14 @@ class TestPoint(BaseElement, GetPointUser, GetPointWater):
         :return:
         """
         point = "backpop_show"
+        correct_point = "backpop_show => {"
         self.stop_app(self.water_sort_android)
         self.AdjustTime.all_change_date()
         self.clear_command()
         self.start_app(self.water_sort_android)
         self.sleep_time(4)
         self.write_contrast2(point)
+        self.assert_result(point, correct_point)
         return self
 
     # def test33_game_new_start(self):

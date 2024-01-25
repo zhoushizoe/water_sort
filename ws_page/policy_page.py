@@ -20,20 +20,24 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
                                 resolution=(1096, 2560))
     terms_of_service = Template(r"../picture/policy_page_picture/terms_of_service.png", record_pos=(-0.117, -0.15),
                                 resolution=(1096, 2560))
-    privacy_policy = Template(r"../picture/policy_page_picture/privacy_policy.png", target_pos=8,
+    privacy_policy = Template(r"../picture/policy_page_picture/privacy_policy.png", target_pos=5,
                               record_pos=(-0.237, -0.131), resolution=(1096, 2560))
     privacy_close = Template(r"../picture/policy_page_picture/privacy_close.png", record_pos=(0.0, 1.058),
                              resolution=(1096, 2560))
     information_image = Template(r"../picture/policy_page_picture/information_image.png", record_pos=(-0.001, 0.45),
                                  resolution=(1440, 3088))
+    terms_of_service_picture = Template(r"../picture/policy_page_picture/terms_service.png", record_pos=(0.015, -0.678),
+                                        resolution=(1440, 3088))
+    privacy_policy_picture = Template(r"../picture/policy_page_picture/privacy_policy_picture.png",
+                                      record_pos=(0.003, 0.031), resolution=(1440, 3088))
 
     water_sort_ios_package = 'ios.water.sort.puzzle.inner'
     water_sort_ios_install = r"/Users/amber/Downloads/ColorBlast.ipa"
     water_sort_android = "water.sort.puzzle.android.inner"
     package_name = "Water Sort"
 
-    def __init__(self, poco):
-        self.BasePoco = poco
+    # def __init__(self, poco):
+    #     self.BasePoco = poco
 
     def first_start_ios(self):
         """
@@ -92,7 +96,7 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
         安卓每次启动游戏都会有一个日志弹窗，没用，可以关闭
         :return:
         """
-        self.image_click_plus(self.close_log_listen, [471, 1381])
+        self.image_click_plus(self.close_log_listen, [202, 1394])
         return self
 
     # 点击进入tos隐私弹窗页面
@@ -103,7 +107,7 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
 
     # 点击进入pp隐私页面
     def goto_pp(self):
-        self.image_click(self.privacy_policy)
+        self.image_click_plus(self.privacy_policy, [706, 1479])
         return self
 
     # 进入隐私弹窗后，点击close按钮回到引导弹窗
@@ -126,6 +130,7 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
     # def test_poco(self):
     #     element = "Button_Close"
     #     self.wait_poco(element)
+
 
 if __name__ == "__main__":
     if not cli_setup():

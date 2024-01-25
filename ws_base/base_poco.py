@@ -51,6 +51,19 @@ class BasePoco:
             self.UnityPoco(element).click()
         return self
 
+    def poco_assert(self, element):
+        """
+        poco的断言方法
+        :param element:
+        :return:
+        """
+        try:
+            assert self.UnityPoco(element)
+            print(f"页面存在{element}")
+        except AssertionError as e:
+            print(f"页面不存在{element}")
+            raise e
+
     def poco_offspring_click(self, element, offspring1, offspring2):
         self.UnityPoco(element).offspring(offspring1).offspring(offspring2).click()
         return self
