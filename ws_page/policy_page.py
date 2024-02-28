@@ -32,7 +32,7 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
                                       record_pos=(0.003, 0.031), resolution=(1440, 3088))
 
     water_sort_ios_package = 'ios.water.sort.puzzle.inner'
-    water_sort_ios_install = r"/Users/amber/Downloads/ColorBlast.ipa"
+    water_sort_ios_install = r"/Users/amber/Downloads/Water_Sort_1.2.1.ipa"
     water_sort_android = "water.sort.puzzle.android.inner"
     package_name = "Water Sort"
 
@@ -51,12 +51,11 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
         self.install_ios(self.water_sort_ios_install)
         # 首次打开iOS包
         self.ios_open_app(self.package_name)
+        self.sleep_time(6)
+        self.image_click([937, 1154])
+        self.sleep_time(6)
+        self.image_click([741, 1254])
         self.sleep_time()
-        # self.image_click([644, 1739])
-        # self.sleep_time()
-        # self.image_click([640, 1570])
-        # self.sleep_time()
-        # self.image_click([644, 1570])
         return self
 
     def first_start_android(self):
@@ -96,7 +95,9 @@ class PolicyPage(BaseElement, WaterSortApp, IosBaseElement):
         安卓每次启动游戏都会有一个日志弹窗，没用，可以关闭
         :return:
         """
-        self.image_click_plus(self.close_log_listen, [202, 1394])
+        self.sleep_time()
+        self.image_click([528, 1397])
+        self.sleep_time(3)
         return self
 
     # 点击进入tos隐私弹窗页面

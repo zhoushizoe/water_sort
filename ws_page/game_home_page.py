@@ -63,6 +63,9 @@ class GameHome(BaseElement, IosBaseElement):
     # 游戏中的banner关闭按钮
     close_banner_button = Template(r"../picture/home_page_picture/close_banner_button.png", record_pos=(0.432, 0.889),
                                    resolution=(1440, 3088))
+    # pad中首页的挑战模式弹窗的go按钮
+    pad_activity_go_button = Template(r"../picture/home_page_picture/pad_activity_gp_button.png",
+                                      record_pos=(-0.152, 0.188), resolution=(1620, 2160))
 
     # def __init__(self, poco):
     #     self.BasePoco = poco
@@ -79,6 +82,23 @@ class GameHome(BaseElement, IosBaseElement):
         self.image_click([782, 1262], times=10)
         self.sleep_time(1)
         self.image_click_plus(self.input_fields, [462, 167])
+        self.image_click_plus(self.debug_passward, [619, 1002])
+        self.image_click_plus(self.debug_close_button, [702, 1312])
+        self.image_click_plus(self.debug_close_button, [702, 850])
+        return self
+
+    def pad_get_debug(self):
+        """
+        在游戏首页开启debug并回到首页
+        :return:
+        """
+        # self.sleep_time(4)
+        # if exists(self.game_icon):
+        #     self.image_click(self.game_icon, times=7)
+        # else:
+        self.image_click([799, 746], times=10)
+        self.sleep_time(1)
+        self.image_click([270, 68])
         self.image_click_plus(self.debug_passward, [619, 1002])
         self.image_click_plus(self.debug_close_button, [702, 1312])
         self.image_click_plus(self.debug_close_button, [702, 850])
@@ -101,6 +121,36 @@ class GameHome(BaseElement, IosBaseElement):
         # self.image_click([822, 1819])
         self.sleep_time(1)
         self.image_click(self.debug_close_button, times=2)
+        self.sleep_time()
+        return self
+
+    def pad_get_level(self, level):
+        """
+        pad上的得到level关卡
+        :return:
+        """
+        self.sleep_time(1)
+        self.image_click([300, 117])
+        self.sleep_time(1)
+        self.image_click([739, 627])
+        self.sleep_time(1)
+        self.ios_delete_text().ios_inter_word(level)
+        self.sleep_time()
+        self.image_click([803, 514]).image_click([803, 514])
+        self.sleep_time()
+        return self
+
+    def pad_get_coin(self, coin):
+        """
+        pad上的得到level关卡
+        :return:
+        """
+        self.image_click([300, 117])
+        self.image_click([1082, 616])
+        self.sleep_time(1)
+        self.ios_delete_text().ios_inter_word(coin)
+        self.sleep_time()
+        self.image_click([803, 514]).image_click([803, 514])
         self.sleep_time()
         return self
 
@@ -230,7 +280,13 @@ class GameHome(BaseElement, IosBaseElement):
         self.image_click(self.activicity_page_go_button)
         return self
 
-
+    def pad_activity_page_go(self):
+        """
+        在pad挑战弹窗上点击go
+        :return:
+        """
+        self.image_click(self.pad_activity_go_button)
+        return self
 
 
 if __name__ == "__main__":

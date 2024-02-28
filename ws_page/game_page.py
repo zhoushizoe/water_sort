@@ -95,6 +95,19 @@ class GamePage(BaseElement, BasePoco):
     close_banner_button = Template(r"../picture/game_page_picture/close_banner_button.png", record_pos=(0.432, 0.889),
                                    resolution=(1440, 3088))
 
+    email_image = Template(r"../picture/game_page_picture/email_image.png", record_pos=(-0.051, -0.616),
+                           resolution=(1440, 3088))
+    empty_tube = Template(r"../picture/game_page_picture/empty_tube.png", record_pos=(0.34, -0.045),
+                          resolution=(1440, 3088))
+    chest_item_withdraw = Template(r"../picture/game_page_picture/chest_item_withdraw.png", record_pos=(-0.18, -0.523),
+                                   resolution=(1440, 3088))
+    chest_coin = Template(r"../picture/game_page_picture/chest_coin.png", record_pos=(0.213, -0.525),
+                          resolution=(1440, 3088))
+    second_empty_tube = Template(r"../picture/game_page_picture/second_empty_tube.png", record_pos=(0.124, 0.287),
+                                 resolution=(1440, 3088))
+    reward_background = Template(r"../picture/game_page_picture/reward_backgroud.png", record_pos=(-0.003, -0.207),
+                                resolution=(1440, 3088))
+
     def game_victory(self):
         """
         点击游戏页面的胜利按钮，进入下一关
@@ -264,6 +277,10 @@ class GamePage(BaseElement, BasePoco):
         self.sleep_time(1)
         return GameHome
 
+    def pad_game_back_home(self):
+        self.image_click([270, 90])
+        return self
+
     def level23_no_step(self):
         """
         出现无法移动toast的前置步骤
@@ -279,6 +296,14 @@ class GamePage(BaseElement, BasePoco):
         :return:
         """
         self.image_click_plus(self.debug_close_button, [103, 172])
+        return self
+
+    def pad_close_debug(self):
+        """
+        pad中的关闭debug
+        :return:
+        """
+        self.image_click([52, 47])
         return self
 
     def debug_win(self, second=40):
@@ -302,6 +327,11 @@ class GamePage(BaseElement, BasePoco):
 
     def debug_doone(self):
         self.image_click(self.debug_doone_button)
+        self.sleep_time(1)
+        return self
+
+    def pad_debug_doone(self):
+        self.image_click([1286, 101])
         self.sleep_time(1)
         return self
 
@@ -387,6 +417,19 @@ class GamePage(BaseElement, BasePoco):
                 self.image_click([1384, 152])
         return self
 
+    def pad_ad_close(self):
+        self.sleep_time(4)
+        if exists(self.victory_english_button):
+            return self
+        else:
+            self.sleep_time(15)
+            if exists(self.ad_close_button):
+                self.image_click(self.ad_close_button)
+            else:
+                self.system_keyevent("BACK")
+                self.image_click([1384, 152])
+        return self
+
     def tool_restart_click(self):
         """
         点击重开道具
@@ -422,6 +465,10 @@ class GamePage(BaseElement, BasePoco):
     def close_banner(self):
         self.image_click(self.close_banner_button)
         return self
+
+    def debug_minus_time(self):
+        self.image_click([182, 257]).image_click([182, 257])
+        self.image_click([1045, 112]).image_click([1045, 112]).image_click([1045, 112])
 
 
 if __name__ == "__main__":

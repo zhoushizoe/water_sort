@@ -33,6 +33,12 @@ class NewGuidance(BaseElement):
         self.sleep_time(2)
         return self
 
+    def pad_first_guidance_step1(self):
+        self.sleep_time()
+        self.image_click([545, 958])
+        self.sleep_time()
+        return self
+
     def first_guidance_step2(self):
         """
         点击第二个管
@@ -44,12 +50,27 @@ class NewGuidance(BaseElement):
         self.sleep_time(6)
         return GamePage
 
+    def pad_first_guidance_step2(self):
+        self.image_click([1085, 958])
+        self.sleep_time(6)
+        return self
+
     def second_guidance_step1(self):
         """
         第二关点击第一个管
         :return:
         """
         self.image_click([312, 1478])
+        self.sleep_time()
+        return self
+
+    def pad_second_guidance_step1(self):
+        """
+        ios设备第二关点击第一个管
+        :return:
+        """
+
+        self.image_click([455, 958])
         self.sleep_time()
         return self
 
@@ -62,12 +83,30 @@ class NewGuidance(BaseElement):
         self.sleep_time()
         return self
 
+    def pad_second_guidance_step2(self):
+        """
+        iOS设备第二关点击第二个管
+        :return:
+        """
+        self.image_click([772, 894])
+        self.sleep_time()
+        return self
+
     def second_guidance_step3(self):
         """
         第二关点击第三个管
         :return:
         """
         self.image_click([1097, 1510])
+        self.sleep_time()
+        return self
+
+    def pad_second_guidance_step3(self):
+        """
+        ios设备第二关点击第三个管
+        :return:
+        """
+        self.image_click([1170, 889])
         self.sleep_time()
         return self
 
@@ -78,6 +117,16 @@ class NewGuidance(BaseElement):
         """
         self.sleep_time()
         self.second_guidance_step1().second_guidance_step2().second_guidance_step1().second_guidance_step3()
+        self.sleep_time(4)
+        return GamePage
+
+    def pad_completed_level2(self):
+        """
+        ios设备第二关完成
+        :return:
+        """
+        self.sleep_time()
+        self.pad_second_guidance_step1().pad_second_guidance_step2().pad_second_guidance_step1().pad_second_guidance_step3()
         self.sleep_time()
         return GamePage
 

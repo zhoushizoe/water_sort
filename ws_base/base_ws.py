@@ -13,9 +13,6 @@ from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 
 class BaseElement:
-    # def __init__(self):
-    #     unity_poco = UnityPoco()
-
     def clear_app(self, package):
         """
         清除应用数据（仅安卓）
@@ -241,6 +238,20 @@ class BaseElement:
         except AssertionError as e:
             print(f"页面不存在图片{correct_result}")
             raise e
+        self.sleep_time(5)
+
+    def assert_equal(self, correct_data, actually_data):
+        """
+        断言相等
+        :param correct_data:
+        :param actually_data:
+        :return:
+        """
+        if correct_data == actually_data:
+            assert True
+        else:
+            print(f"{correct_data}不等于{actually_data}")
+            assert False
 
     def not_exists_assert(self, correct_result):
 
@@ -262,12 +273,13 @@ class IosBaseElement:
     封装关于iOS特殊的一些操作
     """
 
-    def ios_delete_text(self):
+    def ios_delete_text(self, number=3):
         """
         ios中删除输入的字符
         :return:
         """
-        text("\b", enter=False)
+        for i in range(number):
+            text("\b", enter=False)
         return self
 
     def ios_inter_word(self, word, enter=False):
