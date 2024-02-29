@@ -37,29 +37,9 @@ class NewChallengePage(BaseElement):
     hard_button_text = "Hard"
     list1 = ["ChallengeItem_Normal_1_2", "ChallengeItem_Normal_2_3", "ChallengeItem_Normal_3_4",
              "ChallengeItem_Normal_4_5", "ChallengeItem_Normal_5_6", "ChallengeItem_Normal_6_7",
-             "ChallengeItem_Normal_7_8", ]
-    # normal关卡第二关
-    normal_level2 = "ChallengeItem_Normal_1_2"
-    # normal关卡第三关
-    normal_level3 = "ChallengeItem_Normal_2_3"
-    # normal关卡第四关
-    normal_level4 = "ChallengeItem_Normal_3_4"
-    # normal关卡第五关
-    normal_level5 = "ChallengeItem_Normal_4_5"
-    # normal关卡第六关
-    normal_level6 = "ChallengeItem_Normal_5_6"
-    # normal关卡第七关
-    normal_level7 = "ChallengeItem_Normal_6_7"
-    # normal关卡第八关
-    normal_level8 = "ChallengeItem_Normal_7_8"
-    # normal关卡第九关
-    normal_level9 = "ChallengeItem_Normal_8_9"
-    # normal关卡第十关
-    normal_level10 = "ChallengeItem_Normal_9_10"
-    # normal关卡第十一关
-    normal_level11 = "ChallengeItem_Normal_10_11"
-    # normal关卡第十二关
-    normal_level12 = "ChallengeItem_Normal_11_12"
+             "ChallengeItem_Normal_7_8", "ChallengeItem_Normal_8_9"]
+    list2 = ["ChallengeItem_Normal_9_10", "ChallengeItem_Normal_10_11", "ChallengeItem_Normal_11_12"]
+    hard_level_1 = "ChallengeItem_Hard_0_1"
 
     def __init__(self):
         self.BasePoco = BasePoco()
@@ -144,25 +124,51 @@ class NewChallengePage(BaseElement):
             self.BasePoco.get_element_pos_click_name(element_name, 0.07)
         return self
 
-    def new_get_hard_level(self):
+    def new_get_hard_level_1(self):
         """
-        通过12个普通挑战关卡得到hard关卡
+        通过19个普通挑战关卡得到hard关卡
         :return:
         """
         for level in self.list1:
             print(level)
             self.BasePoco.get_element_pos_click_name(level, 0.07).get_element_pos_click_name(level, 0.07)
             self.sleep_time()
-            self.NewGamePage.new_debug_win(20).new_debug_doone()
+            self.NewGamePage.new_debug_win(30).new_debug_doone()
             self.sleep_time(5)
             self.GamePage.ad_close()
             self.sleep_time(4)
             self.new_challenge_continue()
             self.sleep_time(4)
+        self.image_swipe([956, 2727], [952, 2072])
+        self.sleep_time()
+        for level2 in self.list2:
+            print(level2)
+            self.BasePoco.get_element_pos_click_name(level2, 0.07).get_element_pos_click_name(level2, 0.07)
+            self.sleep_time()
+            self.NewGamePage.new_debug_win(30).new_debug_doone()
+            self.sleep_time(5)
+            self.GamePage.ad_close()
+            self.sleep_time(4)
+            self.new_challenge_continue()
+            self.sleep_time(4)
+        return self
+
+    def swipe_one_page(self):
+        """
+        滑动关卡区一屏
+        :return:
+        """
+        self.image_swipe([956, 2727], [952, 2072])
+        return self
+
+    def new_goto_challenge_hard_level_1(self):
+        self.BasePoco.get_element_pos_click_name(self.hard_level_1, 0.07)
+        return self
+
 
 
 if __name__ == "__main__":
     if not cli_setup():
         auto_setup(__file__, logdir=True, devices=[
             "android://127.0.0.1:5037/R3CW10C3D9N?cap_method=ADBCAP&touch_method=MAXTOUCH&", ])
-    NewChallengePage().new_get_hard_level()
+    NewChallengePage().swipe_one_page()

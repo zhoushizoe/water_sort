@@ -36,7 +36,9 @@ class NewPolicyPage(BaseElement):
         在隐私弹窗页面点击接受按钮进入新手引导
         :return:
         """
+        self.sleep_time()
         self.BasePoco.unity_poco_click(self.accept_button)
+        self.sleep_time()
         return self
 
 

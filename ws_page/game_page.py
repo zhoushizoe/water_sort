@@ -414,7 +414,7 @@ class GamePage(BaseElement, BasePoco):
                 self.image_click(self.ad_close_button)
             else:
                 self.system_keyevent("BACK")
-                self.image_click([1384, 152])
+                # self.image_click([1384, 152])
         return self
 
     def pad_ad_close(self):

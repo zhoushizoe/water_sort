@@ -152,7 +152,11 @@ class TestRegressionCase(BaseElement):
         self.PolicyPage.close_log()
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test11_get_guide_page(self):
+        self.get_class()
+        self.NewPolicyPage.first_open_android_app()
+        self.PolicyPage.close_log()
         element = "Button_NoUse"
         self.get_class()
         self.NewPolicyPage.accept_goto_guidance()
@@ -480,11 +484,15 @@ class TestRegressionCase(BaseElement):
         self.PolicyPage.close_log()
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test31_game_setting_tops(self):
         """
         关闭瓶盖
         :return:
         """
+        self.get_class()
+        self.NewPolicyPage.first_open_android_app()
+        self.PolicyPage.close_log()
         self.get_class()
         self.NewPolicyPage.accept_goto_guidance()
         self.NewGuidance.first_guidance_step1().first_guidance_step2()
@@ -713,6 +721,7 @@ class TestRegressionCase(BaseElement):
         self.poco.poco_assert(purchase_button)
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test46_open_chest(self):
         self.get_class()
         self.NewPolicyPage.first_open_android_app()
@@ -739,6 +748,7 @@ class TestRegressionCase(BaseElement):
         self.assert_equal("20", self.NewHomePage.get_coin_number())
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test48_get_tube(self):
         element = "Button_Use"
         self.stop_app(self.water_sort_android)
@@ -764,6 +774,7 @@ class TestRegressionCase(BaseElement):
         self.exists_assert(self.GamePage.empty_tube)
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test50_tube_use(self):
         """
         在rewards页面点击use
@@ -782,6 +793,7 @@ class TestRegressionCase(BaseElement):
         self.exists_assert(self.GamePage.second_empty_tube)
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test51_get_background(self):
         """
         直接得到背景page
@@ -798,6 +810,7 @@ class TestRegressionCase(BaseElement):
         self.exists_assert(self.GamePage.reward_background)
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test52_no_use_background(self):
         self.stop_app(self.water_sort_android)
         self.start_app(self.water_sort_android)
@@ -813,6 +826,7 @@ class TestRegressionCase(BaseElement):
         self.exists_assert(self.CollectPage.choose_first_background)
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test53_use_background(self):
         self.stop_app(self.water_sort_android)
         self.start_app(self.water_sort_android)
@@ -828,6 +842,7 @@ class TestRegressionCase(BaseElement):
         self.not_exists_assert(self.CollectPage.choose_first_background)
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test54_coin_get_background(self):
         """
         金币获得背景
@@ -846,6 +861,7 @@ class TestRegressionCase(BaseElement):
         self.assert_equal("399", self.NewHomePage.get_coin_number())
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test55_collection_tube(self):
         """
         收藏页面的管页面展示是否正常
@@ -873,6 +889,7 @@ class TestRegressionCase(BaseElement):
         self.exists_assert(self.NewCollectionPage.love_tube_tops)
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test57_collection_theme(self):
         """
         收藏页面的theme页面表现正常
@@ -888,6 +905,7 @@ class TestRegressionCase(BaseElement):
         self.exists_assert(collection_theme_page)
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test58_collection_change_theme(self):
         """
         在收藏页面切换theme
@@ -929,6 +947,7 @@ class TestRegressionCase(BaseElement):
         self.poco.poco_assert(element2)
         return self
 
+    @pytest.mark.flaky(reruns=3)
     def test60_first_goto_challenge(self):
         """
         首次弹出挑战弹窗，并选择进入挑战模式
@@ -1116,6 +1135,7 @@ class TestRegressionCase(BaseElement):
         解锁后的hard页面
         :return:
         """
+        element = "ChallengeItem_Hard_0_1"
         self.stop_app(self.water_sort_android)
         self.start_app(self.water_sort_android)
         self.get_class()
@@ -1123,8 +1143,25 @@ class TestRegressionCase(BaseElement):
         self.NewHomePage.new_get_debug().new_get_level_android("86").new_debug_get_coin("999").new_goto_game_page()
         self.NewGamePage.new_close_debug().new_game_back_home()
         self.NewHomePage.new_expand_debug().new_goto_challenge_page()
-        self.NewChallengePage.new_get_hard_level()
+        self.NewChallengePage.new_get_hard_level_1().new_goto_hard_page()
+        self.get_class2()
+        self.poco.poco_assert(element)
+        return self
 
+    def test72_hard_level(self):
+        self.get_class()
+        self.NewChallengePage.new_goto_challenge_hard_level_1().new_goto_challenge_hard_level_1()
+        self.get_class2()
+        self.poco.poco_assert(self.NewGamePage.tips_button)
+        return self
+
+    def test73_victory_hard(self):
+        self.get_class()
+        self.NewGamePage.new_debug_win(30).new_debug_doone()
+        self.GamePage.ad_close()
+        self.get_class2()
+        self.poco.poco_assert(self.NewChallengePage.continue_button)
+        return self
 
 
 

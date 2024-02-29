@@ -49,6 +49,7 @@ class NewHomePage(BaseElement):
         self.BasePoco.UnityPoco("LayoutGroup").child("DebugButton(Clone)")[1].click()
         self.BasePoco.get_element_pos_click(self.debug_enter_first_text)
         self.BasePoco.unity_poco_click(self.debug_close_button).unity_poco_click(self.debug_close_button)
+        self.sleep_time()
         return self
 
     def new_get_level_android(self, level):

@@ -10,6 +10,7 @@ class BasePoco:
 
     def unity_poco_click(self, element):
         self.UnityPoco(element).click()
+        sleep(1)
         return self
 
     def poco_exist_text_click(self, element):
@@ -46,7 +47,7 @@ class BasePoco:
         except AssertionError as e:
             print(f"页面不存在{element}")
             raise e
-        sleep(5)
+        sleep(1)
 
     def poco_assert_text(self, element):
         """
@@ -63,6 +64,7 @@ class BasePoco:
 
     def poco_offspring_click(self, element, offspring1, offspring2):
         self.UnityPoco(element).offspring(offspring1).offspring(offspring2).click()
+        sleep(1)
         return self
 
     def poco_offspring_get_text(self, element, offspring1, offspring2):
@@ -98,6 +100,7 @@ class BasePoco:
         pos1 = (pos[0], pos[1] + add_pos)
         print(pos1)
         self.UnityPoco.click(pos1)
+        sleep(1)
         return self
 
     def get_element_pos_click_name(self, element, add_pos=0.02):
@@ -109,6 +112,7 @@ class BasePoco:
         pos1 = (pos[0], pos[1] + add_pos)
         print(pos1)
         self.UnityPoco.click(pos1)
+        sleep(1)
         return self
 
     def poco_for_pos_click(self, element, pos):
@@ -117,6 +121,7 @@ class BasePoco:
         :return:
         """
         self.UnityPoco(element).focus(pos).click()
+        sleep(1)
         return self
 
     def regular_poco_text(self, element, add_pos=0.02):
@@ -130,5 +135,6 @@ class BasePoco:
         pos1 = (pos[0], pos[1] + add_pos)
         print(pos1)
         self.UnityPoco.click(pos1)
+        sleep(1)
         return self
 

@@ -77,7 +77,7 @@ class NewGamePage(BaseElement):
         """
         for i in range(times):
             self.BasePoco.get_element_pos_click(self.debug_doone)
-            self.sleep_time(1)
+            self.sleep_time(2)
         return self
 
     def new_game_victory(self):
